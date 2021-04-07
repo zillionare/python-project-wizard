@@ -1,0 +1,24 @@
+{
+  "comments": "This is for pylance extension of vscode. Remove me if you're not intented to use vscode.",
+  "exclude": [
+    ".git",
+    ".eggs",
+    ".github",
+    ".history",
+    ".idea",
+    ".tox",
+    ".vscode",
+    "docs",
+    "**/__pycache__",
+    "{{ cookiecutter.github_username }}_{{ cookiecutter.project_slug }}.egg-info"
+  ],
+
+  "ignore": [
+    "src/oldstuff"
+  ],
+
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+
+  "pythonVersion": "*"
+}

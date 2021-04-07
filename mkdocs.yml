@@ -1,0 +1,28 @@
+site_name: cookiecutter-pypackage (forked)
+
+nav:
+  - introduction: readme.md
+  - tutorial: tutorial.md
+  - console script: console_script_setup.md
+  - prompots: prompots.md
+  - setup travis: travis_pypi_setup.md
+  - troubleshooting: troubleshooting.md
+  - release checklist: pypi_release_checklist.md
+
+theme:
+  name: material
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences
+  - pymdownx.details
+  - admonition
+  - toc:
+      baselevel: 2
+      permalink: true
+      slugify: !!python/name:pymdownx.slugs.uslugify
+plugins:
+  - include-markdown
+  - search:
+      lang: en

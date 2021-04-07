@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import subprocess
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 

@@ -4,23 +4,22 @@ name = "cookiecutter-pypackage"
 version = "0.2.0"
 description = "Cookiecutter template for a Python package"
 license = "BSD-3-Clause"
-authors = ["Sam Briggs <briggySmalls90@gmail.com>"]
-readme = "README.rst"
-repository = "https://github.com/briggySmalls/cookiecutter-pypackage"
+authors = ["Aaron Yang <aaron_yang@jieyu.ai>"]
+readme = "README.md"
+repository = "https://github.com/zillionare/cookiecutter-pypackage"
 documentation = "https://briggysmalls.github.io/cookiecutter-pypackage"
 keywords = ['cookiecutter', 'template', 'package']
 
 [tool.poetry.dependencies]
-python = ">=3.5.*"
+python = ">=3.6.*"
 
 [tool.poetry.dev-dependencies]
-bump2version = "*"
-cookiecutter = "*"
-invocations = "*"
-invoke = "*"
-pytest = "*"
-pytest-cookies = "*"
-sphinx = "*"
-sphinx-rtd-theme = "*"
-tox = "*"
+cookiecutter = "1.7.2"
+pytest = "6.0"
 pyyaml = "^5.3.1"
+mkdocs = "^1.1.2"
+mkdocs-material = "^6.1.7"
+mkdocs-material-extensions = "^1.0.1"
+pytest-cov = "^2.10.1"
+tox = "^3.20.1"
+mkdocs-include-markdown-plugin = "^2.8.0"

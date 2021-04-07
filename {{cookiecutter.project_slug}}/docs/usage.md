@@ -1,6 +1,4 @@
-=====
-Usage
-=====
+# Usage
 
 To use {{ cookiecutter.project_name }} in a project::
 
