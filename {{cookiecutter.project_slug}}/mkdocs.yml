@@ -1,4 +1,4 @@
-#site_name: your_great_site
+site_name: {{ cookiecutter.project_name }}
 # site_url: http://www.jieyu.ai
 repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 repo_name: {{ cookiecutter.project_slug }}
