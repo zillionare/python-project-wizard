@@ -47,7 +47,6 @@ markdown_extensions:
   - meta
 plugins:
   - include-markdown
-  - mknotebooks
   - search:
       lang: en
 extra:
