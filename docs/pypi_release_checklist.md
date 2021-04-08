@@ -1,62 +1,64 @@
-PyPI Release Checklist
-======================
+# PyPI Release Checklist
 
-For Every Release
--------------------
+## For Every Release
 
-#. Update HISTORY.rst
+1.  Update HISTORY.rst
 
-#. Commit the changes:
+2.  Commit the changes:
 
-    .. code-block:: bash
+    > ``` bash
+    > git add HISTORY.rst
+    > git commit -m "Changelog for upcoming release 0.1.1."
+    > ```
 
-        git add HISTORY.rst
-        git commit -m "Changelog for upcoming release 0.1.1."
+3.  Update version number (can also be patch or major)
 
-#. Update version number (can also be patch or major)
+    > ``` bash
+    > bump2version minor
+    > ```
 
-    .. code-block:: bash
+4.  Run the tests:
 
-        bump2version minor
+    > ``` bash
+    > tox
+    > ```
 
-#. Run the tests:
+5.  Push the commit:
 
-    .. code-block:: bash
+    > ``` bash
+    > git push
+    > ```
 
-        tox
+6.  Push the tags, creating the new release on both GitHub and PyPI:
 
-#. Push the commit:
+    > ``` bash
+    > git push --tags
+    > ```
 
-    .. code-block:: bash
+7.  Check the PyPI listing page to make sure that the README, release
+    notes, and roadmap display properly. If not, try one of these:
 
-        git push
+    > 1.  Copy and paste the RestructuredText into
+    >     <http://rst.ninjs.org/> to find out what broke the formatting.
+    >
+    > 2.  Check your long\_description locally:
+    >
+    >     > ``` bash
+    >     > pip install readme_renderer
+    >     > # Replace PROBLEM.rst with the name of the file you are having trouble with
+    >     > python -m readme_renderer PROBLEM.rst >/dev/null
+    >     > ```
 
-#. Push the tags, creating the new release on both GitHub and PyPI:
+8.  Edit the release on GitHub (e.g.
+    <https://github.com/audreyr/cookiecutter/releases>). Paste the
+    release notes into the release's release page, and come up with a
+    title for the release.
 
-    .. code-block:: bash
-
-        git push --tags
-
-#. Check the PyPI listing page to make sure that the README, release notes, and roadmap display properly. If not, try one of these:
-
-    #. Copy and paste the RestructuredText into http://rst.ninjs.org/ to find out what broke the formatting.
-
-    #. Check your long_description locally:
-
-        .. code-block:: bash
-
-            pip install readme_renderer
-            # Replace PROBLEM.rst with the name of the file you are having trouble with
-            python -m readme_renderer PROBLEM.rst >/dev/null
-
-#. Edit the release on GitHub (e.g. https://github.com/audreyr/cookiecutter/releases). Paste the release notes into the release's release page, and come up with a title for the release.
-
-About This Checklist
---------------------
+## About This Checklist
 
 This checklist is adapted from:
 
-* https://gist.github.com/audreyr/5990987
-* https://gist.github.com/audreyr/9f1564ea049c14f682f4
+-   <https://gist.github.com/audreyr/5990987>
+-   <https://gist.github.com/audreyr/9f1564ea049c14f682f4>
 
 It assumes that you are using all features of Cookiecutter PyPackage.

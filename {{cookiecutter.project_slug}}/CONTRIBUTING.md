@@ -49,35 +49,43 @@ If you are proposing a feature:
 Ready to contribute? Here's how to set up `{{ cookiecutter.project_slug }}` for local development.
 
 1. Fork the `{{ cookiecutter.project_slug }}` repo on GitHub.
-2. Clone your fork locally::
+2. Clone your fork locally
 
+```
     $ git clone git@github.com:your_name_here/{{ cookiecutter.project_slug }}.git
+```
 
-3. Ensure `poetry is installed`_.
-4. Install dependencies and start your virtualenv::
+3. Ensure [poetry](https://python-poetry.org/docs/) is installed.
+4. Install dependencies and start your virtualenv:
 
-    $ poetry install
+```
+    $ poetry install -E test -E doc -E dev
+```
 
-5. Create a branch for local development::
+5. Create a branch for local development:
 
+```
     $ git checkout -b name-of-your-bugfix-or-feature
+```
 
    Now you can make your changes locally.
 
 6. When you're done making changes, check that your changes pass the
-   tests, including testing other Python versions, with tox::
+   tests, including testing other Python versions, with tox:
 
+```
     $ tox
+```
 
-7. Commit your changes and push your branch to GitHub::
+7. Commit your changes and push your branch to GitHub:
 
+```
     $ git add .
     $ git commit -m "Your detailed description of your changes."
     $ git push origin name-of-your-bugfix-or-feature
+```
 
 8. Submit a pull request through the GitHub website.
-
-.. _poetry is installed: https://python-poetry.org/docs/
 
 ## Pull Request Guidelines
 
@@ -88,27 +96,33 @@ Before you submit a pull request, check that it meets these guidelines:
    your new functionality into a function with a docstring, and add the
    feature to the list in README.md.
 3. The pull request should work for Python 3.5, 3.6, 3.7 and 3.8, and for PyPy. Check
-   https://travis-ci.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/pull_requests
+   https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions
    and make sure that the tests pass for all supported Python versions.
 
 ## Tips
 {%- if cookiecutter.use_pytest == 'y' -%}
+```
     $ pytest tests.test_{{ cookiecutter.project_slug }}
+```
 {%- else -%}
+```
     $ python -m unittest tests.test_{{ cookiecutter.project_slug }}
+```
 {%- endif -%}
 
-To run a subset of tests::
+To run a subset of tests.
 
 
 ## Deploying
 
 A reminder for the maintainers on how to deploy.
 Make sure all your changes are committed (including an entry in HISTORY.md).
-Then run::
+Then run:
 
+```
 $ poetry patch # possible: major / minor / patch
 $ git push
 $ git push --tags
+```
 
 Travis will then deploy to PyPI if tests pass.

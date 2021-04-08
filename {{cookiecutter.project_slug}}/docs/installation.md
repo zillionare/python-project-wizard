@@ -1,50 +1,45 @@
-.. highlight:: shell
+# Installation
 
-============
-Installation
-============
+## Stable release
 
+To install {{ cookiecutter.project\_name }}, run this command in your
+terminal:
 
-Stable release
---------------
+``` console
+$ pip install {{ cookiecutter.project_slug }}
+```
 
-To install {{ cookiecutter.project_name }}, run this command in your terminal:
+This is the preferred method to install {{ cookiecutter.project\_name
+}}, as it will always install the most recent stable release.
 
-.. code-block:: console
+If you don't have [pip][] installed, this [Python installation guide][]
+can guide you through the process.
 
-    $ pip install {{ cookiecutter.project_slug }}
+## From source
 
-This is the preferred method to install {{ cookiecutter.project_name }}, as it will always install the most recent stable release.
-
-If you don't have `pip`_ installed, this `Python installation guide`_ can guide
-you through the process.
-
-.. _pip: https://pip.pypa.io
-.. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
-
-
-From source
------------
-
-The source for {{ cookiecutter.project_name }} can be downloaded from the `Github repo`_.
+The source for {{ cookiecutter.project\_name }} can be downloaded from
+the [Github repo][].
 
 You can either clone the public repository:
 
-.. code-block:: console
+``` console
+$ git clone git://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+```
 
-    $ git clone git://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+Or download the [tarball][]:
 
-Or download the `tarball`_:
-
-.. code-block:: console
-
-    $ curl -OJL https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
+``` console
+$ curl -OJL https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
+```
 
 Once you have a copy of the source, you can install it with:
 
-.. code-block:: console
+``` console
+$ pip install .
+```
 
-    $ pip install .
+  [pip]: https://pip.pypa.io
+  [Python installation guide]: http://docs.python-guide.org/en/latest/starting/installation/
+  [Github repo]: https://github.com/%7B%7B%20cookiecutter.github_username%20%7D%7D/%7B%7B%20cookiecutter.project_slug%20%7D%7D
+  [tarball]: https://github.com/%7B%7B%20cookiecutter.github_username%20%7D%7D/%7B%7B%20cookiecutter.project_slug%20%7D%7D/tarball/master
 
-.. _Github repo: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
-.. _tarball: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master

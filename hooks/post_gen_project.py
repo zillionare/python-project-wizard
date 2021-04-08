@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import subprocess
+import sys
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
@@ -21,3 +22,4 @@ if __name__ == '__main__':
 
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
+
