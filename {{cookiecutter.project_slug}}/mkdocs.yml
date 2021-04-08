@@ -51,7 +51,7 @@ plugins:
       lang: en
 extra:
   social:
-    - icon: fontawesome/brands/tweet
+    - icon: fontawesome/brands/twitter
       # replace with your own tweet link below
       link: http://www.jieyu.ai
       name: Tweet
