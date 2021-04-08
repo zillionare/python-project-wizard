@@ -10,10 +10,6 @@
         alt = "Release Status">
 </a>
 
-<a href="https://travis-ci.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}">
-    <img src="https://img.shields.io/travis/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}.svg" alt="Build Status">
-</a>
-
 <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions">
     <img src="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/main.yml/badge.svg" alt="CI Status">
 </a>
