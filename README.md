@@ -1,7 +1,6 @@
 # Cookiecutter PyPackage
 
-
-Cookiecutter_ template for a Python package, forked from [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
+Cookiecutter template for a Python package, forked from [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
 
 * GitHub repo: https://github.com/zillionare/cookiecutter-pypackage/
 * Documentation: https://zillionare.github.io/cookiecutter-pypackage/
