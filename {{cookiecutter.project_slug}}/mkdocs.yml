@@ -3,7 +3,15 @@
 repo_url: https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 repo_name: {{ cookiecutter.project_slug }}
 #strict: true
-
+nav:
+  - home: index.md
+  - installation: installation.md
+  - usage: usage.md
+  - modules: api.md
+  - contributing: contributing.md
+  {% if cookiecutter.create_author_file == 'y' -%}  - authors: authors.md
+  {% endif -%}
+  - history: history.md
 theme:
   name: material
   language: en

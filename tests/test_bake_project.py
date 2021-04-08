@@ -1,16 +1,18 @@
-from contextlib import contextmanager
-import shlex
-import os
-import pytest
-import sys
-import subprocess
-import yaml
 import datetime
+import importlib
+import logging
+import os
+import shlex
+import subprocess
+import sys
+from contextlib import contextmanager
+from unittest import mock
+
+import pytest
+import yaml
 from cookiecutter.utils import rmtree
 
-from click.testing import CliRunner
-
-import importlib
+# logging.basicConfig(level=logging.DEBUG)
 
 
 _DEPENDENCY_FILE = "pyproject.toml"
@@ -97,49 +99,10 @@ def test_bake_with_defaults(cookies):
         assert 'tox.ini' in found_toplevel_files
         assert 'tests' in found_toplevel_files
 
-
-@pytest.mark.parametrize("extra_context", [
-    {},
-    {'full_name': 'name "quote" name'},
-    {'full_name': "O'connor"}
-])
-def test_bake_and_run_tests(cookies, extra_context):
-    with bake_in_temp_dir(
-            cookies,
-            extra_context=extra_context,
-    ) as result:
-        assert result.project.isdir()
-        # Test pyproject installs pytest
-        dep_file_path = result.project.join(_DEPENDENCY_FILE)
-        lines = dep_file_path.readlines()
-        assert "pytest = \"*\"\n" in lines
-        # Test contents of test file
-        test_file_path = result.project.join('tests/test_python_boilerplate.py')
-        lines = test_file_path.readlines()
-        assert "import pytest" in ''.join(lines)
-        # Run the tests
-        commands = build_commands(["poetry run invoke test"])
-        run_inside_dir(commands, str(result.project))
-
-
-# def test_bake_and_run_travis_pypi_setup(cookies):
-#     # given:
-#     with bake_in_temp_dir(cookies) as result:
-#         project_path = str(result.project)
-#
-#         # when:
-#         travis_setup_cmd = ('python travis_pypi_setup.py'
-#                             ' --repo audreyr/cookiecutter-pypackage'
-#                             ' --password invalidpass')
-#         run_inside_dir(travis_setup_cmd, project_path)
-#         # then:
-#         result_travis_config = yaml.load(
-#             result.project.join(".travis.yml").open()
-#         )
-#         min_size_of_encrypted_password = 50
-#         assert len(
-#             result_travis_config["deploy"]["password"]["secure"]
-#         ) > min_size_of_encrypted_password
+        mkdocs_yml = os.path.join(result._project_dir, "mkdocs.yml")
+        with open(mkdocs_yml, "r") as f:
+            lines = f.readlines()
+            assert '  - authors: authors.md\n' in lines
 
 
 def test_bake_without_travis_pypi_setup(cookies):
@@ -162,15 +125,15 @@ def test_bake_without_author_file(cookies):
         extra_context={'create_author_file': 'n'}
     ) as result:
         found_toplevel_files = [f.basename for f in result.project.listdir()]
-        assert 'AUTHORS.rst' not in found_toplevel_files
+        assert 'AUTHORS.md' not in found_toplevel_files
         doc_files = [f.basename for f in result.project.join('docs').listdir()]
-        assert 'authors.rst' not in doc_files
+        assert 'authors.md' not in doc_files     
 
-        # Assert there are no spaces in the toc tree
-        docs_index_path = result.project.join('docs/index.rst')
-        with open(str(docs_index_path)) as index_file:
-            assert 'contributing\n   history' in index_file.read()
-
+        # make sure '-authors: authors.md' not appeared in mkdocs.yml
+        mkdocs_yml = os.path.join(result._project_dir, "mkdocs.yml")
+        with open(mkdocs_yml, "r") as f:
+            lines = f.readlines()
+            assert '  - authors: authors.md\n' not in lines
 
 @pytest.mark.parametrize("license_info", [
     ('MIT', 'MIT '),
@@ -198,7 +161,7 @@ def test_bake_not_open_source(cookies):
         found_toplevel_files = [f.basename for f in result.project.listdir()]
         assert _DEPENDENCY_FILE in found_toplevel_files
         assert 'LICENSE' not in found_toplevel_files
-        assert 'License' not in result.project.join('README.rst').read()
+        assert 'License' not in result.project.join('README.md').read()
         assert 'license' not in result.project.join(_DEPENDENCY_FILE).read()
 
 
@@ -219,19 +182,19 @@ def test_not_using_pytest(cookies):
 def test_using_google_docstrings(cookies):
     with bake_in_temp_dir(cookies) as result:
         assert result.project.isdir()
-        # Test docs include sphinx extension
-        docs_conf_file_path = result.project.join('docs/conf.py')
-        lines = docs_conf_file_path.readlines()
-        assert "sphinx.ext.napoleon" in ''.join(lines)
+        # Test lint rule contains google style
+        flake8_conf_file_apth = result.project.join(".flake8")
+        lines = flake8_conf_file_apth.readlines()
+        assert "docstring-convention=google" in ''.join(lines)
 
 
 def test_not_using_google_docstrings(cookies):
     with bake_in_temp_dir(cookies, extra_context={'use_google_docstrings': 'n'}) as result:
         assert result.project.isdir()
-        # Test docs do not include sphinx extension
-        docs_conf_file_path = result.project.join('docs/conf.py')
-        lines = docs_conf_file_path.readlines()
-        assert "sphinx.ext.napoleon" not in ''.join(lines)
+        # Test lint rule contains no google style
+        flake8_conf_file_apth = result.project.join(".flake8")
+        lines = flake8_conf_file_apth.readlines()
+        assert "docstring-convention=google" not in ''.join(lines)
 
 
 # def test_project_with_hyphen_in_module_name(cookies):
@@ -257,8 +220,7 @@ def test_not_using_google_docstrings(cookies):
 
 @pytest.mark.parametrize("args", [
     ({'command_line_interface': "No command-line interface"}, False),
-    ({'command_line_interface': 'click'}, True),
-    ({'command_line_interface': 'argparse'}, True),
+    ({'command_line_interface': 'fire'}, True),
 ])
 def test_bake_with_no_console_script(cookies, args):
     context, is_present = args
@@ -273,55 +235,16 @@ def test_bake_with_no_console_script(cookies, args):
 
 
 def test_bake_with_console_script_cli(cookies):
-    context = {'command_line_interface': 'click'}
+    context = {'command_line_interface': 'fire'}
     result = cookies.bake(extra_context=context)
     project_path, project_slug, project_dir = project_info(result)
     module_path = os.path.join(project_dir, 'cli.py')
     module_name = '.'.join([project_slug, 'cli'])
-    spec = importlib.util.spec_from_file_location(module_name, module_path)
-    cli = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(cli)
-    runner = CliRunner()
-    noarg_result = runner.invoke(cli.main)
-    assert noarg_result.exit_code == 0
-    noarg_output = ' '.join([
-        'Replace this message by putting your code into',
-        project_slug])
-    assert noarg_output in noarg_result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert 'Show this message' in help_result.output
+    out = subprocess.check_output([sys.executable, module_path])
+    assert "is one of the following:\n\n     help\n\n" in out.decode('utf-8')
 
+    proc = subprocess.Popen([sys.executable, module_path, "help"],
+    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-def test_bake_with_argparse_console_script_cli(cookies):
-    context = {'command_line_interface': 'argparse'}
-    result = cookies.bake(extra_context=context)
-    project_path, project_slug, project_dir = project_info(result)
-    module_path = os.path.join(project_dir, 'cli.py')
-    module_name = '.'.join([project_slug, 'cli'])
-    spec = importlib.util.spec_from_file_location(module_name, module_path)
-    cli = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(cli)
-    runner = CliRunner()
-    noarg_result = runner.invoke(cli.main)
-    assert noarg_result.exit_code == 0
-    noarg_output = ' '.join([
-        'Replace this message by putting your code into',
-        project_slug])
-    assert noarg_output in noarg_result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert 'Show this message' in help_result.output
-
-
-@pytest.mark.parametrize("command", [
-    "poetry run invoke format --check",
-    "poetry run invoke lint",
-    "poetry run invoke docs --no-launch",
-])
-def test_bake_and_run_and_invoke(cookies, command):
-    """Run the unit tests of a newly-generated project"""
-    with bake_in_temp_dir(cookies) as result:
-        assert result.project.isdir()
-        commands = build_commands([command])
-        run_inside_dir(commands, str(result.project))
+    out, err = proc.communicate()
+    assert 'python_boilerplate\n' in out.decode('utf-8')

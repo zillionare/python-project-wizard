@@ -2,13 +2,15 @@
 
 Cookiecutter template for a Python package, forked from [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
 
+For those who don't know what cookiecutter is: cookiecutter is like a scaffold tool, a wizard that help you create new porject from template.
+
 * GitHub repo: https://github.com/zillionare/cookiecutter-pypackage/
 * Documentation: https://zillionare.github.io/cookiecutter-pypackage/
 * Free software: BSD license
 
 ## Features
 
-This template contains the following features:
+This template will help you create new Python project that contains the following features:
 
 * [Poetry](https://python-poetry.org/): Manage version, dependancy, build and release
 * [Mkdocs](https://www.mkdocs.org): Writting your docs in markdown style

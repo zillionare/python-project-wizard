@@ -1,7 +1,7 @@
 site_name: cookiecutter-pypackage (forked)
 
 nav:
-  - introduction: readme.md
+  - introduction: index.md
   - tutorial: tutorial.md
   - console script: console_script_setup.md
   - prompots: prompots.md
