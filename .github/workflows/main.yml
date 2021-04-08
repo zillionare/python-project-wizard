@@ -22,7 +22,7 @@ jobs:
       matrix:
         python-versions: [3.6, 3.7, 3.8, 3.9]
         poetry-version: [1.1.2]
-        os: [ubunut-18.04, ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-18.04, ubuntu-20.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
