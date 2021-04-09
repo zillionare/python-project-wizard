@@ -1,6 +1,5 @@
 import datetime
-import importlib
-import logging
+
 import os
 import shlex
 import subprocess
@@ -71,6 +70,27 @@ def check_output_inside_dir(command, dirpath):
     with inside_dir(dirpath):
         return subprocess.check_output(shlex.split(command))
 
+def execute(command, dirpath, timeout=30, supress_warning=True):
+    """Run command inside given directory and returns output
+
+    if there's stderr, then it may raise exception according to supress_warning
+    """
+    with inside_dir(dirpath):
+        proc = subprocess.Popen(
+            shlex.split(command), 
+            stderr=subprocess.PIPE, 
+            stdout=subprocess.PIPE
+        )
+
+    out, err = proc.communicate(timeout=timeout)
+    out = out.decode('utf-8')
+    err = err.decode('utf-8')
+
+    if err and not supress_warning:
+        raise RuntimeError(err)
+    else:
+        print(err)
+        return out
 
 def test_year_compute_in_license_file(cookies):
     with bake_in_temp_dir(cookies) as result:

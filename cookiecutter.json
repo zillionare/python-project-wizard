@@ -14,5 +14,6 @@
   "create_author_file": "y",
   "open_source_license": ["MIT", "BSD-3-Clause", "ISC", "Apache-2.0", "GPL-3.0-only", "Not open source"],
   "use_google_docstrings": "y",
+  "install_precommit_hooks": "y",
   "_copy_without_render": ["docs/history.md", "docs/contributing.md", "docs/authors.md", "docs/index.md", ".github/workflows/*.yml"]
 }
