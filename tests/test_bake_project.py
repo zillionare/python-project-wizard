@@ -1,10 +1,10 @@
 import datetime
-
 import os
 import shlex
 import subprocess
 import sys
 from contextlib import contextmanager
+from typing import List
 from unittest import mock
 
 import pytest
@@ -70,14 +70,14 @@ def check_output_inside_dir(command, dirpath):
     with inside_dir(dirpath):
         return subprocess.check_output(shlex.split(command))
 
-def execute(command, dirpath, timeout=30, supress_warning=True):
+def execute(command: List[str], dirpath: str, timeout=30, supress_warning=True):
     """Run command inside given directory and returns output
 
     if there's stderr, then it may raise exception according to supress_warning
     """
     with inside_dir(dirpath):
         proc = subprocess.Popen(
-            shlex.split(command), 
+            command, 
             stderr=subprocess.PIPE, 
             stdout=subprocess.PIPE
         )
