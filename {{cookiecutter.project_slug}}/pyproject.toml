@@ -35,7 +35,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.6,<4.0"
+python = ">=3.6.1,<4.0"
 {%- if cookiecutter.command_line_interface|lower == 'fire' %}
 fire = "0.4.0"
 {%- endif %}
@@ -44,7 +44,6 @@ black  = { version = "20.8b1", optional = true}
 isort  = { version = "5.6.4", optional = true}
 doc8  = { version = "0.8.1", optional = true}
 flake8  = { version = "3.8.4", optional = true}
-pre-commit  = { version = "2.8.2", optional = true}
 pytest  = { version = "6.1.2", optional = true}
 pytest-cov  = { version = "2.10.1", optional = true}
 tox  = { version = "^3.20.1", optional = true}
@@ -57,6 +56,7 @@ mkdocstrings  = { version = "^0.13.6", optional = true}
 mkdocs-material-extensions  = { version = "^1.0.1", optional = true}
 twine  = { version = "^3.3.0", optional = true}
 mkdocs-autorefs = {version = "0.1.1", optional = true}
+pre-commit = {version = "^2.12.0", optional = true}
 
 [tool.poetry.extras]
 test = [
