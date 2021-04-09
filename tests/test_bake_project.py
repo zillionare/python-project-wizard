@@ -125,20 +125,6 @@ def test_bake_with_defaults(cookies):
             assert '  - authors: authors.md\n' in lines
 
 
-def test_bake_without_travis_pypi_setup(cookies):
-    with bake_in_temp_dir(
-        cookies,
-        extra_context={'use_pypi_deployment_with_travis': 'n'}
-    ) as result:
-        result_travis_config = yaml.load(
-            result.project.join(".travis.yml").open(),
-            Loader=yaml.FullLoader
-        )
-        assert "deploy" not in result_travis_config
-        assert "python" == result_travis_config["language"]
-        # found_toplevel_files = [f.basename for f in result.project.listdir()]
-
-
 def test_bake_without_author_file(cookies):
     with bake_in_temp_dir(
         cookies,
