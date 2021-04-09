@@ -199,22 +199,13 @@ def test_not_using_pytest(cookies):
         assert "import pytest" not in ''.join(lines)
 
 
-def test_using_google_docstrings(cookies):
-    with bake_in_temp_dir(cookies) as result:
+def test_docstrings_style(cookies):
+    with bake_in_temp_dir(cookies, extra_context={'docstrings_style': 'google'}) as result:
         assert result.project.isdir()
         # Test lint rule contains google style
         flake8_conf_file_apth = result.project.join(".flake8")
         lines = flake8_conf_file_apth.readlines()
-        assert "docstring-convention=google" in ''.join(lines)
-
-
-def test_not_using_google_docstrings(cookies):
-    with bake_in_temp_dir(cookies, extra_context={'use_google_docstrings': 'n'}) as result:
-        assert result.project.isdir()
-        # Test lint rule contains no google style
-        flake8_conf_file_apth = result.project.join(".flake8")
-        lines = flake8_conf_file_apth.readlines()
-        assert "docstring-convention=google" not in ''.join(lines)
+        assert "docstring-convention = google" in ''.join(lines)
 
 
 # def test_project_with_hyphen_in_module_name(cookies):
@@ -259,12 +250,10 @@ def test_bake_with_console_script_cli(cookies):
     result = cookies.bake(extra_context=context)
     project_path, project_slug, project_dir = project_info(result)
     module_path = os.path.join(project_dir, 'cli.py')
-    module_name = '.'.join([project_slug, 'cli'])
-    out = subprocess.check_output([sys.executable, module_path])
-    assert "is one of the following:\n\n     help\n\n" in out.decode('utf-8')
 
-    proc = subprocess.Popen([sys.executable, module_path, "help"],
-    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out = execute([sys.executable, module_path], project_dir)
+    assert "is one of the following:\n\n     help\n" in out
 
-    out, err = proc.communicate()
-    assert 'python_boilerplate\n' in out.decode('utf-8')
+    out = execute([sys.executable, module_path, "help"], project_dir)
+
+    assert project_slug in out

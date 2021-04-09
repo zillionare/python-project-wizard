@@ -39,13 +39,17 @@ The year of the initial package copyright in the license file.
 version  
 The starting version number of the package.
 
+install_precommit_hooks
+If you choose yes, then cookiecutter will install pre-commit hooks for you.
+
+docstrings_style
+one of `google, numpy, rst`. It's required by flake8-docstrings.
+
 ## Options
 
 The following package configuration options set up different features
 for your project.
 
-use_pypi_deployment_with_travis  
-Whether to use PyPI deployment with Travis.
 
 command_line_interface  
 Whether to create a console script using Python Fire. Console script
