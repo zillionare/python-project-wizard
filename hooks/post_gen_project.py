@@ -24,8 +24,7 @@ def install_pre_commit_hooks():
     if not os.path.exists(os.path.join(PROJECT_DIRECTORY, ".git")):
         execute("git", "init")
 
-    # may warn that xxx is not on path, doesn't matter
-    execute(sys.executable, "-m", "pip", "install", "--user", "pre-commit==2.12.0", supress_exception=True)
+    execute(sys.executable, "-m", "pip", "install", "pre-commit==2.12.0")
     execute("pre-commit", "install")
 
 if __name__ == '__main__':
