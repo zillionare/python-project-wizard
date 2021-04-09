@@ -24,3 +24,21 @@ pytest-cov = "^2.10.1"
 tox = "^3.20.1"
 mkdocs-include-markdown-plugin = "^2.8.0"
 fire = "^0.4.0"
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
