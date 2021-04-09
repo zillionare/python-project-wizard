@@ -54,11 +54,17 @@ code:
 
 ``` bash
 cd mypackage
-git init .
+
+# uncomment the following line, if you didn't choose install pre-commit hooks at last
+# step. If you chose 'yes', then cookiecutter have already done that for you, since 
+# pre-commit install need repo exist.
+
+# git init
 git add .
 git commit -m "Initial skeleton."
+git branch -M main
 git remote add origin git@github.com:myusername/mypackage.git
-git push -u origin master
+git push -u origin main
 ```
 
 Where `myusername` and `mypackage` are adjusted for your username and
@@ -66,6 +72,10 @@ package name.
 
 You'll need a ssh key to push the repo. You can [Generate][] a key or
 [Add][] an existing one.
+
+??? Tips
+  if you have asked to install pre-commit hooks at last step, then you should find
+  pre-commit is running when you run `git commit`
 
 ## Step 4: Install Dev Requirements
 
@@ -75,8 +85,12 @@ Install the new project's local development requirements inside a
 virtual environment using pipenv:
 
 ``` bash
+pip install poetry
 poetry install -E doc -E dev -E test
+tox
 ```
+
+You should see no errors. 
 
 ??? Tips
     Extra dependencies are grouped into three groups, doc, dev and test for better 
@@ -85,10 +99,62 @@ poetry install -E doc -E dev -E test
 
     Since you're the developer, so you will need install all the dependencies.
 
-## Step 5: Set Up Github Actions
+??? Tips
+  if you found erros like the following during tox run:
+  ```
+  ERROR: InterpreterNotFound: python3.9
+  ```
+  don't worry, this is simple because python3.x is not found on your machine. If you
+  decide to support that version of Python in your package, just install it on your
+  machine. Otherwise, remove it from tox.ini and pyproject.toml (find python3.x and
+  remove it))
 
-It should be worked already after your very first push. It's all set!
+## Step 5: Publish your package...to testpypi
+  You can try to build and publish your package to test pypi, if it works well, so be
+  true with real pypi.
 
+  1. config testpypi repo by:
+  ```
+  poetry config repositories.testpypi https://test.pypi.org/legacy/
+  ```
+
+  2. in case you haven't register testpyi account, please visit [testpypi](https://test.pypi.org/)
+  and register account, and create an upload token under `account settings` pages
+
+  3. run the following command to publish your package to testpypi:
+  ```
+  poetry publish --build -r testpypi
+  ```
+  your will be prompted with account and password, use `__token__` as username, and your
+  token as password.
+## Step 6. Set Up Github Actions
+
+  Once you've pushed your files onto github repo, github actions will be all set, except
+  for one thing: you need configure secrets.
+
+  Here is the procedures:
+
+  Go to your repo's setting page, find `Environments` menu in the left sidebar, then
+  click `New environment` button, create a new environment (I'd prefer `CI` as its
+  name):
+
+  Then add secrets into this environment. Secrets includes:
+
+  - TEST_PYPI_API_TOKEN
+  - PYPI_API_TOKEN you should apply on at [PYPI]
+
+  ## Step 7. Set Up codecov integration
+
+    This template already baked [codecov] in. You don't need to set token for codecov,
+    however, you should grant access to your repo for codecov. This can be done at either
+    side, github or codecov.
+
+    You can logon to [codecov], sign in with your github account, then add new repository
+    to codecov.
+
+
+  [codecov]: https://codecov.io/
+  [PYPI]: https://pypi.org
   [Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md
   [GitHub account]: https://github.com/
   [PyPI]: https://pypi.python.org/pypi
