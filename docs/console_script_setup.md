@@ -9,8 +9,8 @@ argparse (Python 3.2+).
 
 # How It Works
 
-If the 'command\_line\_interface' option is set to \['fire'\] during setup, cookiecutter
- will add a file 'cli.py' in the project\_slug subdirectory. An entry point is added to
+If the 'command_line_interface' option is set to 'fire' during setup, cookiecutter
+ will add a file 'cli.py' in the project_slug subdirectory. An entry point is added to
 pyproject.toml that points to the main function in cli.py.
 
 # Usage
