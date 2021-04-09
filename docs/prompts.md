@@ -6,31 +6,31 @@ When you create a package, you are prompted to enter these values.
 
 The following appear in various parts of your generated project.
 
-full\_name  
+full_name  
 Your full name.
 
 email  
 Your email address.
 
-github\_username  
+github_username  
 Your GitHub username.
 
-project\_name  
+project_name  
 The name of your new Python package project. This is used in
 documentation, so spaces and any characters are fine here.
 
-project\_slug  
+project_slug  
 The namespace of your Python package. This should be Python
 import-friendly. Typically, it is the slugified version of
-project\_name.
+project_name.
 
-project\_short\_description  
+project_short_description  
 A 1-sentence description of what your Python package does.
 
-release\_date  
+release_date  
 The date of the first release.
 
-pypi\_username  
+pypi_username  
 Your Python Package Index account username.
 
 year  
@@ -44,10 +44,10 @@ The starting version number of the package.
 The following package configuration options set up different features
 for your project.
 
-use\_pypi\_deployment\_with\_travis  
+use_pypi_deployment_with_travis  
 Whether to use PyPI deployment with Travis.
 
-command\_line\_interface  
+command_line_interface  
 Whether to create a console script using Python Fire. Console script
-entry point will match the project\_slug. Options: \['Fire', "No
+entry point will match the project_slug. Options: \['fire', "No
 command-line interface"\]

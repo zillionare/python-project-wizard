@@ -19,6 +19,5 @@
 
   "reportMissingImports": true,
   "reportMissingTypeStubs": false,
-
-  "pythonVersion": "*"
+  "pythonVersion": "3.8"
 }
