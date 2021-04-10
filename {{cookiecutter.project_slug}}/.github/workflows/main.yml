@@ -51,8 +51,8 @@ jobs:
 
       - uses: codecov/codecov-action@v1
         with:
-          verbose: true
           fail_ci_if_error: true
+          files: coverage.xml
       - name: Build wheels and source tarball
         run: >-
           poetry build
