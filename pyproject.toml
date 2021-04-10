@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "cookiecutter-pypackage"
-version = "0.2.0"
+version = "0.3.0"
 description = "Cookiecutter template for a Python package"
 license = "BSD-3-Clause"
 authors = ["Aaron Yang <aaron_yang@jieyu.ai>"]
