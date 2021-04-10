@@ -43,11 +43,16 @@ jobs:
       - name: list files
         run: ls -l .
           
-      - name: publish git pages
-        if: github.ref == 'refs/heads/release'
+      - name: pre-publish documentation
         run: |
-          poetry install -E doc -E dev
-          mkdocs gh-deploy
+          python -m pip install -e .[doc]
+          mkdocs build
+
+      - name: publish documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: ./site
 
       - uses: codecov/codecov-action@v1
         with:
