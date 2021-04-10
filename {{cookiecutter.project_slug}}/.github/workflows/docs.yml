@@ -19,7 +19,8 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip     # install pip
-          python3 -m pip install -e .[doc]
+          python3 -m pip install poetry
+          poetry install -E doc
 
       - name: Build site
         run: mkdocs build
