@@ -100,6 +100,7 @@ Before you submit a pull request, check that it meets these guidelines:
    and make sure that the tests pass for all supported Python versions.
 
 ## Tips
+
 {%- if cookiecutter.use_pytest == 'y' -%}
 ```
     $ pytest tests.test_{{ cookiecutter.project_slug }}

@@ -9,7 +9,7 @@
 </a>
 
 <a href="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions">
-    <img src="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/main.yml/badge.svg" alt="CI Status">
+    <img src="https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/actions/workflows/main.yml/badge.svg?branch=release" alt="CI Status">
 </a>
 
 <a href="https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io/en/latest/?badge=latest">
@@ -35,7 +35,7 @@
 
 {% if is_open_source %}
 * Free software: {{ cookiecutter.open_source_license }}
-* Documentation: [readthedocs](https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io)
+* Documentation: <https://{{ cookiecutter.project_slug | replace("_", "-") }}.readthedocs.io>
 {% endif %}
 
 ## Features
