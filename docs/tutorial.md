@@ -1,22 +1,14 @@
 # Tutorial
 
-<div class="note">
+??? Note
+    Did you find this artichle confusing? [Edit this file] and pull a request!
 
-<div class="title">
+To start with, you will need [GitHub], [Pypi] , [TestPyPi] and [Codecov] account. If 
+you don't have one, please follow the links to apply one before you get started on this 
+tutorial. 
 
-Note
-
-</div>
-
-Did you find any of these instructions confusing? [Edit this file][] and
-submit a pull request with your improvements!
-
-</div>
-
-To start with, you will need a [GitHub account][] and an account on
-[PyPI][]. Create these before you get started on this tutorial. If you
-are new to Git and GitHub, you should probably spend a few minutes on
-some of the tutorials at the top of the page at [GitHub Help][].
+If you are new to Git and GitHub, you should probably spend a few minutes on
+some of the tutorials at the top of the page at [GitHub Help]
 
 ## Step 1: Install Cookiecutter
 
@@ -75,6 +67,7 @@ We did a smoke test at last by running `tox`. This will give you a test report a
 report. You should see no errors except some lint warnings.
 
 ??? Tips
+
     Extra dependencies are grouped into three groups, doc, dev and test for better 
     granularity. When you ship the package, dependencies in group doc, dev and test will
      not be shipped.
@@ -82,6 +75,7 @@ report. You should see no errors except some lint warnings.
     As the developer, you will need install all the dependencies.
 
 ??? Tips
+
   if you found erros like the following during tox run:
   ```
   ERROR: InterpreterNotFound: python3.9
@@ -89,7 +83,7 @@ report. You should see no errors except some lint warnings.
   don't be panic, this is just because python3.x is not found on your machine. If you
   decide to support that version of Python in your package, please install it on your
   machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
-  remove it))
+  remove it)
 
 ## Step 5: Create a GitHub Repo
 
@@ -146,9 +140,19 @@ You'll need a ssh key to push the repo. You can [Generate][] a key or
   ```
   your will be prompted with account and password, use `__token__` as username, and your
   token as password.
+
+??? Tips
+
+    This step is for testing package build purpose. The actual publish procedures will
+    be automatically done once you push your code to github with the following
+    conditions met:
+    
+    1. the branch is release
+    2. the commit is tagged
+    3. build/testing executed by github CI passed
 ## Step 7. Set Up Github Actions
 
-  Once you've pushed your files  github repo, github actions will be all set, except
+  Once you've pushed your files github repo, github actions will be all set, except
   for one thing: you need configure secrets for deployment.
 
   Here is the procedures:
@@ -160,27 +164,43 @@ You'll need a ssh key to push the repo. You can [Generate][] a key or
   Then add secrets into this environment. Secrets should include:
 
   - TEST_PYPI_API_TOKEN
-  - PYPI_API_TOKEN, which you should apply on at [PYPI]
+  - PYPI_API_TOKEN
+
+??? Tips
+
+    for security consideration, please apply deploy API token on [PyPI] and 
+    [TestPyPI], instead use your username/password.
 
 ## Step 8. Set Up codecov integration
 
-  This template already baked [codecov] in. You don't need to set token for codecov,
-  however, you should grant access to your repo for codecov. This can be done at either
-  side, github or codecov.
+  This template already baked [codecov] in. All you need to do is to 
+  grant access to your repo for codecov. This can be done at either side, github or codecov.
 
   You can logon to [codecov], sign in with your github account, then add new repository
   to codecov.
 
-## Step 9. Set up readthedocs integration
+## Step 9. Check documentation
 
-  The template has baked [readthedocs] in, all you need is just goto [readthedos]
+  Documentation will be published and available at 
+  <https://{your_github_account}.github.io/{your_repo}> once:
 
-  [readthedocs]: https://readthedocs.org
-  [codecov]: https://codecov.io/
-  [PYPI]: https://pypi.org
-  [Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md
-  [GitHub account]: https://github.com/
-  [PyPI]: https://pypi.python.org/pypi
-  [GitHub Help]: https://help.github.com/
-  [Generate]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
-  [Add]: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+  1. you pushed code to release branch
+  2. build/testing from github CI passed
+
+  If you'd like to see what it's look like, you could run the followng command:
+
+  ```
+  mkdocs gh-deploy
+  ```
+
+  then check your documentation at <https://{your_github_account}.github.io/{your_repo}>
+
+
+[Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md
+[Codecov]: https://codecov.io/
+[PYPI]: https://pypi.org
+[GitHub]: https://github.com/
+[TestPyPI]: https://test.pypi.org/
+[GitHub Help]: https://help.github.com/
+[Generate]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+[Add]: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/

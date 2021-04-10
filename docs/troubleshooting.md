@@ -1,17 +1,8 @@
 # Troubleshooting
 
-<div class="note">
-
-<div class="title">
-
-Note
-
-</div>
-
-Can you help improve this file? [Edit this file][] and submit a pull
-request with your improvements!
-
-</div>
+??? Note
+    Can you help improve this file? [Edit this file] and submit a pull
+    request with your improvements!
 
 ## Windows Issues
 
@@ -35,4 +26,4 @@ Or:
     virtualenv whenever they change directory, so you should remember
     the path to the virtualenv in case you need it.
 
-  [Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/troubleshooting.md
+[Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/troubleshooting.md

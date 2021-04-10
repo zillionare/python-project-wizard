@@ -14,7 +14,7 @@
 3.  Update version number (can also be patch or major)
 
     > ``` bash
-    > bump2version minor
+    > poetry patch
     > ```
 
 4.  Run the tests:
@@ -23,7 +23,7 @@
     > tox
     > ```
 
-5.  Push the commit:
+5.  Push the commit to release branch:
 
     > ``` bash
     > git push
@@ -32,22 +32,13 @@
 6.  Push the tags, creating the new release on both GitHub and PyPI:
 
     > ``` bash
+    > git tag %tag_name%
     > git push --tags
     > ```
 
 7.  Check the PyPI listing page to make sure that the README, release
-    notes, and roadmap display properly. If not, try one of these:
-
-    > 1.  Copy and paste the RestructuredText into
-    >     <http://rst.ninjs.org/> to find out what broke the formatting.
-    >
-    > 2.  Check your long\_description locally:
-    >
-    >     > ``` bash
-    >     > pip install readme_renderer
-    >     > # Replace PROBLEM.rst with the name of the file you are having trouble with
-    >     > python -m readme_renderer PROBLEM.rst >/dev/null
-    >     > ```
+    notes, and roadmap display properly. If tox test passwed, this should be ok, since
+    we have already run twine check during tox test.
 
 8.  Edit the release on GitHub (e.g.
     <https://github.com/audreyr/cookiecutter/releases>). Paste the
