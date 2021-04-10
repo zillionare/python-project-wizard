@@ -30,15 +30,24 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python-versions }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install tox tox-gh-actions poetry
+          pip install poetry tox tox-gh-actions
 
       - name: test with tox
-        run: tox
+        run:
+          tox
+      - name: list files
+        run: ls -l .
+          
+      - name: publish git pages
+        if: github.ref == 'refs/heads/release'
+        run: |
+          poetry install -E doc -E dev
+          mkdocs gh-deploy
 
       - uses: codecov/codecov-action@v1
         with:
