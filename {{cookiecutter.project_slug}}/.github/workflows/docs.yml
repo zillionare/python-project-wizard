@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip     # install pip
-          python3 -m pip -e .[doc]
+          python3 -m pip install -e .[doc]
 
       - name: Build site
         run: mkdocs build
