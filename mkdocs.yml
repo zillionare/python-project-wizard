@@ -5,7 +5,6 @@ nav:
   - introduction: index.md
   - tutorial: tutorial.md
   - console script: console_script_setup.md
-  - troubleshooting: troubleshooting.md
   - release checklist: pypi_release_checklist.md
   - FAQ: faq.md
   
