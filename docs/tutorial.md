@@ -163,8 +163,9 @@ You'll need a ssh key to push the repo. You can [Generate][] a key or
 
   Then add secrets into this environment. Secrets should include:
 
-  - TEST_PYPI_API_TOKEN
-  - PYPI_API_TOKEN
+  - TEST_PYPI_API_TOKEN, see [How to apply testpypi token]
+  - PYPI_API_TOKEN, see [How to apply pypi token]
+  - PERSONAL_TOKEN, see [How to apply personal token]
 
 ??? Tips
 
@@ -204,3 +205,6 @@ You'll need a ssh key to push the repo. You can [Generate][] a key or
 [GitHub Help]: https://help.github.com/
 [Generate]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 [Add]: https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
+[How to apply testpypi token]: https://test.pypi.org/manage/account/
+[How to apply pypi token]: https://pypi.org/manage/account/
+[How to apply personal token]: https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token

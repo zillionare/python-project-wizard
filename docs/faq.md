@@ -1,18 +1,19 @@
 ???+ Question
-    # Why no travis CI?
+    # Why not travis CI?
     Travis CI is a great service, however, github actions is super convenient and needs
     zero configuration. Less configuration, less error prone.
 
 ???+ Question
-    # Why no read the docs?
-    Same reason as above. Git pages is convenient than read the docs, no configuration 
-    at all, and what you see at local, is what you see at remote. 
+    # Why not read the docs?
+    Same reason as above. Git pages is convenient than read the docs, it requires no
+    further configuration, except access token. As to read the docs, you need to
+    write v2 config file, plus several settings on web pages.
 
 ???+ Question
     # Why mkdocs over sphinx?
     reStructured Text and Sphinx is way to tedious, though powerful. With extension, 
     you'll find almost all features are available in mkdocs, in a neat and productive 
-    way. Poetry and Markdown, is the two key factors driven me develop this template.
+    way. Poetry and Markdown, are the two key factors driven me develop this template.
 
 ??? Question
     # What are the configuration items?
