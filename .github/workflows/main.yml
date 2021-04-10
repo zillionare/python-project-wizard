@@ -43,5 +43,5 @@ jobs:
       - name: publish doc
         if: github.ref == 'refs/heads/release'
         run: |
-          poetry install -E doc -E dev
+          poetry install 
           mkdocs gh-deploy
