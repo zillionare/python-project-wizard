@@ -2,7 +2,7 @@
 
 Cookiecutter template for Python package, forked from [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
 
-For those who don't know what cookiecutter is: cookiecutter is like a scaffold tool, a wizard whick help you create new porject from template.
+For those who don't know what cookiecutter is: cookiecutter is like a scaffold tool, a wizard which help you create new porject from template.
 
 * [GitHub repo](https://github.com/zillionare/cookiecutter-pypackage/)
 * [Documentation](https://zillionare.github.io/cookiecutter-pypackage/)
@@ -19,7 +19,7 @@ This template will create new Python project with the following features:
 * [Tox]: Test your code against defined Python version matrix, lint and build artifact check.
 * Format with [Black] and [Isort]
 * Lint code with [Flake8] and [Flake8-docstrings]
-* Formatting/linting anytime when commit/run local tox/CI
+* [Pre-commit hooks]: Formatting/linting anytime when commit/run local tox/CI
 * [Mkdocstrings]: Auto API doc generation
 * Command line interface using [Python Fire] (optional)
 * CI by [github actions], auto publish from release branch when tests passed
@@ -59,3 +59,4 @@ This repo is forked from [audreyr/cookiecutter-pypackage](https://github.com/aud
 [Python Fire]: https://github.com/google/python-fire
 [github actions]: https://github.com/features/actions
 [Git Pages]: https://pages.github.com
+[Pre-commit hooks]: https://pre-commit.com/

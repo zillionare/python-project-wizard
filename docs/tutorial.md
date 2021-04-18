@@ -18,9 +18,6 @@ Install cookiecutter:
 pip install cookiecutter
 ```
 
-We'll also need poetry so \[install that
-too\](<https://python-poetry.org/docs/#installation>):
-
 ## Step 2: Generate Your Package
 
 Now it's time to generate your Python package.
