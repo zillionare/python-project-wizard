@@ -1,5 +1,6 @@
 import os
 
 def main():
-    repo = "https://github.com/zillionare/cookiecutter-pypackage.git"
-    os.system(f"cookiecutter -s {repo}")
+    cwd = os.path.dirname(__file__)
+    package_dir = os.path.abspath(os.path.join(cwd, ".."))
+    os.system(f"cookiecutter {package_dir}")

@@ -13,6 +13,11 @@ packages = [
   {include = "ppw"}
 ]
 
+include = [
+  '{{cookiecutter.project_slug}}/*',
+  'cookiecutter.json'
+]
+
 [tool.poetry.dependencies]
 python = ">=3.6.*"
 cookiecutter = "1.7.2"
