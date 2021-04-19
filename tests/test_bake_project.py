@@ -237,7 +237,7 @@ def test_bake_with_console_script_cli(cookies):
     module_path = os.path.join(project_dir, 'cli.py')
 
     out = execute([sys.executable, module_path], project_dir)
-    assert f"is one of the following:{os.linesep}{os.linesep}     help\n" in out
+    assert f"is one of the following:{os.linesep}{os.linesep}     help{os.linesep}" in out
 
     out = execute([sys.executable, module_path, "help"], project_dir)
 
