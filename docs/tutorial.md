@@ -28,6 +28,60 @@ Run the following command and feed with answers:
   ppw
 ```
 
+Finally a new folder will be created under current folder, the name is the answer you
+provided to `project_slug`.
+
+The project layout should looks like:
+
+```
+.
+├── AUTHORS.md
+├── CONTRIBUTING.md
+├── .coveragerc
+├── dist
+├── docs
+│   ├── api.md
+│   ├── authors.md
+│   ├── contributing.md
+│   ├── history.md
+│   ├── index.md
+│   ├── installation.md
+│   └── usage.md
+├── .editorconfig
+├── .flake8
+├── .github
+│   ├── ISSUE_TEMPLATE.md
+│   └── workflows
+│       ├── dev.yml
+│       └── release.yml
+├── .gitignore
+├── HISTORY.md
+├── .isort.cfg
+├── LICENSE
+├── mkdocs.yml
+├── poetry.lock
+├── ppw_0419_01
+│   ├── cli.py
+│   ├── __init__.py
+│   ├── ppw_0419_01.py
+│   └── __pycache__
+├── .pre-commit-config.yaml
+├── pyproject.toml
+├── pyrightconfig.json
+├── README.md
+├── site
+├── tests
+│   ├── __init__.py
+│   ├── __pycache__
+│   └── test_ppw_0419_01.py
+└── tox.ini
+```
+
+Here the project_slug is ppw_0419_01, when you genereate yours, it could be other name.
+
+Also be noticed that there's pyproject.toml in this folder. This is the main
+configuration file of our project.
+
 ## Step 3: Build a virtual environment for your development
 Now build a virtual python environment for your development, and develop your project 
 always in that environment from now on.
@@ -40,9 +94,11 @@ conda create -n mypackage python=3.8
 conda activate mypackage
 ```
 
+You could choose your favorite python version here. 
 ## Step 4: Install Dev Requirements
 
-You should still be in the folder containing the `pyproject.toml` file.
+You should still be in the folder named as `%proejct_slug`, which containing the
+ `pyproject.toml` file.
 
 Install the new project's local development requirements inside a
 virtual environment:
@@ -133,11 +189,11 @@ package name.
 You'll need a ssh key to push the repo. You can [Generate] a key or
 [Add] an existing one.
 
-???+ Tips
+???+ Warning
 
     if you answered 'yes' to the question if install pre-commit hooks at last step, 
     then you should find pre-commit be invoked when you run `git commit`, and some files
-     may be modified by hooks. If so, please add these files and commit again.
+     may be modified by hooks. If so, please add these files and **commit again**.
 
 ### Check result
 
