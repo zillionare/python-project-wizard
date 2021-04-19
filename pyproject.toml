@@ -14,8 +14,9 @@ packages = [
 ]
 
 include = [
-  '{{cookiecutter.project_slug}}/*',
-  'cookiecutter.json'
+  '{{cookiecutter.project_slug}}/**/*',
+  'cookiecutter.json',
+  'hooks/*'
 ]
 
 [tool.poetry.dependencies]
