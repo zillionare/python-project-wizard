@@ -22,7 +22,7 @@ include = [
 python = ">=3.6.*"
 cookiecutter = "1.7.2"
 
-pytest = {version = "5.4.3", optional=true}
+pytest = {version = "^5.4.3", optional=true}
 pytest-cookies = {version = "^0.5.1", optional=true}
 pyyaml = {version="^5.3.1",optional=true}
 mkdocs = {version="^1.1.2",optional=true}
