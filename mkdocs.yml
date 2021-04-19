@@ -1,6 +1,6 @@
 site_name: Python Project Wizard (ppw)
 repo_url: https://github.com/zillionare/cookiecutter-pypackage
-repo_name: cookiecutter-pypackage
+repo_name: Python Project Wizard
 nav:
   - Introduction: index.md
   - Tutorial: tutorial.md
@@ -24,6 +24,9 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       linenums: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences
   - pymdownx.details
   - admonition

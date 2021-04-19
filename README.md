@@ -3,10 +3,11 @@
 A tool for creating skeleton python project, built with popular develop tools and 
 conform to best practice.
 
+[![Version](http://img.shields.io/pypi/v/ppw?color=brightgreen)](https://pypi.python.org/pypi/ppw)
+[![CI Status](https://github.com/zillionare/cookiecutter-pypackage/actions/workflows/main.yml/badge.svg?branch=release)](https://github.com/zillionare/cookiecutter-pypackage)
+[![Dowloads](https://pepy.tech/badge/ppw)](https://pepy.tech/project/ppw)
+[![License](https://img.shields.io/pypi/l/ppw)](https://opensource.org/licenses/BSD-2-Clause)
 
-* [GitHub repo](https://github.com/zillionare/cookiecutter-pypackage/)
-* [Documentation](https://zillionare.github.io/cookiecutter-pypackage/)
-* Free software: BSD license
 
 ## Features
 
