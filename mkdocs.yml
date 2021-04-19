@@ -38,3 +38,10 @@ plugins:
   - include-markdown
   - search:
       lang: en
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/zillionare
+      name: Github
+    - icon: material/email
+      link: "mailto:code@jieyu.ai"
