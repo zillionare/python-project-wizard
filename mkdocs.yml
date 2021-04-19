@@ -1,4 +1,4 @@
-site_name: cookiecutter-pypackage (forked)
+site_name: Python Project Wizard (ppw)
 repo_url: https://github.com/zillionare/cookiecutter-pypackage
 repo_name: cookiecutter-pypackage
 nav:

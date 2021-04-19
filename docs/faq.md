@@ -15,7 +15,7 @@
     you'll find almost all features are available in mkdocs, in a neat and productive 
     way. Poetry and Markdown, are the two key factors driven me develop this template.
 
-??? Question
+???+ Question
     # What are the configuration items?
     
     Here is a list:

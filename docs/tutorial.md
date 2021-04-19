@@ -70,14 +70,14 @@ We also launch a smoke test here by running `tox`. This will give you a test rep
 
 ??? Tips
 
-  if you found erros like the following during tox run:
-  ```
-  ERROR: InterpreterNotFound: python3.9
-  ```
-  don't be panic, this is just because python3.x is not found on your machine. If you
-  decide to support that version of Python in your package, please install it on your
-  machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
-  remove it).
+    if you found erros like the following during tox run:
+    ```
+    ERROR: InterpreterNotFound: python3.9
+    ```
+    don't be panic, this is just because python3.x is not found on your machine. If you
+    decide to support that version of Python in your package, please install it on your
+    machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
+    remove it).
 
 ## Step 5: Create a GitHub Repo
 
@@ -95,10 +95,11 @@ Then goto repo > settings > secrets, click on 'New repository secret', add the f
 ## Step 6: Set Up codecov integration
 
 ???+ Tips
-  If you have already setup codecov integration and configured access for all your 
-  repositories, you can skip this step.
 
-In your browser, visit [install codecov app], you'll get this page:
+    If you have already setup codecov integration and configured access for all your 
+    repositories, you can skip this step.
+
+In your browser, visit [install codecov app], you'll be landed at this page:
 
 ![](http://images.jieyu.ai/images/202104/20210419175222.png)
 
@@ -132,10 +133,11 @@ package name.
 You'll need a ssh key to push the repo. You can [Generate] a key or
 [Add] an existing one.
 
-??? Tips
-  if you have asked to install pre-commit hooks at last step, then you should find
-  pre-commit is running when you run `git commit`, and some files may be changed by
-  hooks. If so, please add these files and commit again
+???+ Tips
+
+    if you answered 'yes' to the question if install pre-commit hooks at last step, 
+    then you should find pre-commit be invoked when you run `git commit`, and some files
+     may be modified by hooks. If so, please add these files and commit again.
 
 ### Check result
 
@@ -167,7 +169,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 ## Step 9. Make official release
 
   After done with your phased development, switch to releas branch, following 
-  instructions at [pypi_release_checklist.md], trigger first official release and check
+  instructions at [release checklist](/pypi_release_checklist), trigger first official release and check
   result at [PYPI].
 
 
