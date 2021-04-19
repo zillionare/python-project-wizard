@@ -39,3 +39,20 @@ jobs:
 
       - name: test with tox
         run: tox
+
+      - name: list files
+        run: ls -l .
+
+      - name: Build wheels and source tarball
+        run: |
+          poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
+          poetry version --short
+          poetry build
+
+      - name: publish to Test PyPI
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN}}
+          repository_url: https://test.pypi.org/legacy/
+          skip_existing: true
