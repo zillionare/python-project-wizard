@@ -1,6 +1,6 @@
 # Publish package on release branch if it's tagged with 'v*'
 
-name: release & publish
+name: release & publish workflow
 
 # Controls when the action will run.
 on:
@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   release:
     name: Create Release
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
