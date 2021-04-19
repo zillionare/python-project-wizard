@@ -45,12 +45,14 @@ jobs:
         run: ls -l .
 
   publish_dev_build:
+    # if test failed, we should not publish
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python-versions }}
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
