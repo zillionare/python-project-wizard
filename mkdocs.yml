@@ -1,12 +1,13 @@
-site_name: cookiecutter-pypackage (forked)
+site_name: Python Project Wizard (ppw)
 repo_url: https://github.com/zillionare/cookiecutter-pypackage
-repo_name: cookiecutter-pypackage
+repo_name: Python Project Wizard
 nav:
-  - introduction: index.md
-  - tutorial: tutorial.md
-  - console script: console_script_setup.md
-  - release checklist: pypi_release_checklist.md
+  - Introduction: index.md
+  - Tutorial: tutorial.md
+  - Console script: console_script_setup.md
+  - Release checklist: pypi_release_checklist.md
   - FAQ: faq.md
+  - History: history.md
   
 theme:
   name: material
@@ -23,6 +24,9 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       linenums: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences
   - pymdownx.details
   - admonition
@@ -34,3 +38,10 @@ plugins:
   - include-markdown
   - search:
       lang: en
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/zillionare
+      name: Github
+    - icon: material/email
+      link: "mailto:code@jieyu.ai"

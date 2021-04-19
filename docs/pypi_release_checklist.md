@@ -2,12 +2,16 @@
 
 ## For Every Release
 
-1.  Update HISTORY.rst
+0.  Check out release branch, merge all changes from master/main to release
+
+1.  Update HISTORY.md
+
+    Be noticed that github workflow will generate a changelog for you automatically.
 
 2.  Commit the changes:
 
     > ``` bash
-    > git add HISTORY.rst
+    > git add HISTORY.md
     > git commit -m "Changelog for upcoming release 0.1.1."
     > ```
 
@@ -36,14 +40,11 @@
     > git push --tags
     > ```
 
+    tag_name has to be started with 'v'(lower case), to leverage github release workflow.
+
 7.  Check the PyPI listing page to make sure that the README, release
     notes, and roadmap display properly. If tox test passwed, this should be ok, since
     we have already run twine check during tox test.
-
-8.  Edit the release on GitHub (e.g.
-    <https://github.com/audreyr/cookiecutter/releases>). Paste the
-    release notes into the release's release page, and come up with a
-    title for the release.
 
 ## About This Checklist
 

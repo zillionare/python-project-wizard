@@ -1,44 +1,48 @@
-# Cookiecutter PyPackage
+# Python Project Wizard
 
-Cookiecutter template for Python package, forked from [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage).
+A tool for creating skeleton python project, built with popular develop tools and 
+conform to best practice.
 
-For those who don't know what cookiecutter is: cookiecutter is like a scaffold tool, a wizard whick help you create new porject from template.
+[![Version](http://img.shields.io/pypi/v/ppw?color=brightgreen)](https://pypi.python.org/pypi/ppw)
+[![CI Status](https://github.com/zillionare/cookiecutter-pypackage/actions/workflows/main.yml/badge.svg?branch=release)](https://github.com/zillionare/cookiecutter-pypackage)
+[![Dowloads](https://pepy.tech/badge/ppw)](https://pepy.tech/project/ppw)
+[![License](https://img.shields.io/pypi/l/ppw)](https://opensource.org/licenses/BSD-2-Clause)
 
-* [GitHub repo](https://github.com/zillionare/cookiecutter-pypackage/)
-* [Documentation](https://zillionare.github.io/cookiecutter-pypackage/)
-* Free software: BSD license
 
 ## Features
 
-This template will create new Python project with the following features:
+This tool will create Python project with the following features:
 
 * [Poetry]: Manage version, dependancy, build and release
 * [Mkdocs]: Writting your docs in markdown style
-* Testing with unittest or [Pytest]
-* Code coverage report and upload to [Codecov]
-* [Tox]: Test your code against defined Python version matrix, lint and build artifact check.
+* Testing with [Pytest] (unittest is still supported out of the box)
+* Code coverage report and endorsed by [Codecov]
+* [Tox]: Test your code against environment matrix, lint and artifact check.
 * Format with [Black] and [Isort]
 * Lint code with [Flake8] and [Flake8-docstrings]
-* Formatting/linting anytime when commit/run local tox/CI
+* [Pre-commit hooks]: Formatting/linting anytime when commit/run local tox/CI
 * [Mkdocstrings]: Auto API doc generation
 * Command line interface using [Python Fire] (optional)
-* CI by [github actions], auto publish from release branch when tests passed
+* Continuouse Integration/Deployment by [github actions], includes:
+    - publish dev build/official release to TestPyPI/PyPI automatically when CI success
+    - publish documents automatically when CI success
+    - extract change log from github and integrate with release notes automatically
 * Host your documentation from [Git Pages] with zero-config
 
 ## Quickstart
 
-Install the latest Cookiecutter if you haven't installed it yet (this requires
-Cookiecutter 1.4.0 or higher)
+Install ppw if you haven't install it yet:
 
 ```
-  pip install -U cookiecutter
+  pip install -U ppw
 ```
 
-Generate a Python package project:
+Generate a Python package project by simple run:
 
 ```
-  cookiecutter https://github.com/zillionare/cookiecutter-pypackage.git
+  ppw
 ```
+
 Then follow **[Tutorial](/tutorial)** to finish other configurations.
 
 # Credits
@@ -59,3 +63,4 @@ This repo is forked from [audreyr/cookiecutter-pypackage](https://github.com/aud
 [Python Fire]: https://github.com/google/python-fire
 [github actions]: https://github.com/features/actions
 [Git Pages]: https://pages.github.com
+[Pre-commit hooks]: https://pre-commit.com/

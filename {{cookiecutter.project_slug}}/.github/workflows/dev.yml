@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: dev workflow
 
 # Controls when the action will run. 
 on:
@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         python-versions: [3.6, 3.7, 3.8, 3.9]
-        os: [ubuntu-18.04]#, ubuntu-20.04, macos-latest, windows-latest]
+        os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -40,21 +40,41 @@ jobs:
       - name: test with tox
         run:
           tox
+
       - name: list files
         run: ls -l .
-          
-      - name: publish git pages
-        if: github.ref == 'refs/heads/release'
+
+  publish_dev_build:
+    # if test failed, we should not publish
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
         run: |
-          poetry install -E doc -E dev
-          mkdocs gh-deploy
+          python -m pip install --upgrade pip
+          pip install poetry tox tox-gh-actions
+
+      - name: test with tox
+        run:
+          tox
+
+      - name: list files
+        run: ls -l .
 
       - uses: codecov/codecov-action@v1
         with:
           fail_ci_if_error: true
           files: coverage.xml
+
       - name: Build wheels and source tarball
-        run: >-
+        run: |
+          poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
+          poetry version --short
           poetry build
 
       - name: publish to Test PyPI
@@ -63,12 +83,4 @@ jobs:
           user: __token__
           password: ${{ secrets.TEST_PYPI_API_TOKEN}}
           repository_url: https://test.pypi.org/legacy/
-          skip_existing: true
-          
-      - name: Publish distribution to PyPI only on release branch when tagged
-        if: startsWith(github.ref, 'refs/tags') && github.ref == 'refs/heads/release'
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
           skip_existing: true

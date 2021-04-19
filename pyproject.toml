@@ -1,29 +1,52 @@
 [tool]
 [tool.poetry]
-name = "cookiecutter-pypackage"
-version = "0.3.0"
-description = "Cookiecutter template for a Python package"
+name = "ppw"
+version = "0.4.0"
+description = "A Wizard to create a skeleton python project with up-to-date technology"
 license = "BSD-3-Clause"
 authors = ["Aaron Yang <aaron_yang@jieyu.ai>"]
 readme = "README.md"
 repository = "https://github.com/zillionare/cookiecutter-pypackage"
 documentation = "https://briggysmalls.github.io/cookiecutter-pypackage"
 keywords = ['cookiecutter', 'template', 'package']
+packages = [
+  {include = "ppw"}
+]
+
+include = [
+  '{{cookiecutter.project_slug}}/**/*',
+  'cookiecutter.json',
+  'hooks/*'
+]
 
 [tool.poetry.dependencies]
 python = ">=3.6.*"
-
-[tool.poetry.dev-dependencies]
 cookiecutter = "1.7.2"
-pytest-cookies = "^0.5.1"
-pyyaml = "^5.3.1"
-mkdocs = "^1.1.2"
-mkdocs-material = "^6.1.7"
-mkdocs-material-extensions = "^1.0.1"
-pytest-cov = "^2.10.1"
-tox = "^3.20.1"
-mkdocs-include-markdown-plugin = "^2.8.0"
-fire = "^0.4.0"
+
+pytest = {version = "^5.4.3", optional=true}
+pytest-cookies = {version = "^0.5.1", optional=true}
+pyyaml = {version="^5.3.1",optional=true}
+mkdocs = {version="^1.1.2",optional=true}
+mkdocs-material = {version="^6.1.7",optional=true}
+mkdocs-material-extensions = {version="^1.0.1",optional=true}
+pytest-cov = {version="^2.10.1",optional=true}
+tox = {version = "^3.20.1", optional=true}
+mkdocs-include-markdown-plugin = {version = "^2.8.0", optional=true}
+fire = {version="^0.4.0", optional=true}
+
+[tool.poetry.extras]
+dev = [
+  "pytest",
+  "pytest-cookies",
+  "pyyaml",
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-material-extensions",
+  "pytest-cov",
+  "tox",
+  "mkdocs-include-markdown-plugin",
+  "fire"
+]
 
 [tool.black]
 line-length = 88
@@ -42,3 +65,10 @@ exclude = '''
   | dist
 )/
 '''
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ppw = 'ppw.cli:main'
