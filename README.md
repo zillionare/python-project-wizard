@@ -4,8 +4,8 @@ A tool for creating skeleton python project, built with popular develop tools an
 conform to best practice.
 
 [![Version](http://img.shields.io/pypi/v/ppw?color=brightgreen)](https://pypi.python.org/pypi/ppw)
-[![CI Status](https://github.com/zillionare/cookiecutter-pypackage/actions/workflows/main.yml/badge.svg?branch=release)](https://github.com/zillionare/cookiecutter-pypackage)
-[![Dowloads](https://pepy.tech/badge/ppw)](https://pepy.tech/project/ppw)
+[![CI Status](https://github.com/zillionare/cookiecutter-pypackage/actions/workflows/release.yml/badge.svg?branch=release)](https://github.com/zillionare/cookiecutter-pypackage)
+[![Dowloads](https://img.shields.io/pypi/dm/ppw)](https://pypi.org/project/ppw/)
 [![License](https://img.shields.io/pypi/l/ppw)](https://opensource.org/licenses/BSD-2-Clause)
 
 
