@@ -1,4 +1,28 @@
 ???+ Question
+    # Why github workflow `release & publish` failed?
+    We have used a github action `heinrichreimer/github-changelog-generator-action` to
+    generate change log automatically for your project. However, this action requires
+    some configuration.
+
+    Goto .github/workflows/release.yml (in your project folder), find the following:
+    ```
+        - name: generate change log
+        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issues: true
+          issuesWoLabels: true
+          pullRequests: true
+          prWoLabels: true
+          unreleased: true
+          addSections: '{"documentation":{"prefix":"**Documentation:**","labels":["documentation"]}}'
+          #sinceTag: v0.1.1
+          output: CHANGELOG.md
+    ```
+    uncomment `#sinceTag` line and given an existed tag name in your project. If 
+    there's none, you have to create one now.
+
+???+ Question
     # Why not travis CI?
     Travis CI is a great service, however, github actions is super convenient, less configuration
     , better integration. Less configuration, less error prone.
