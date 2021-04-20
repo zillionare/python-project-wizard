@@ -20,10 +20,13 @@ def execute(*args, supress_exception = False):
     else:
         return out
 
-def install_pre_commit_hooks():
+def init_git():
+    # workaround for issue #1
     if not os.path.exists(os.path.join(PROJECT_DIRECTORY, ".git")):
         execute("git", "init")
+    execute("git", "tag", "0.1.0")
 
+def install_pre_commit_hooks():
     execute(sys.executable, "-m", "pip", "install", "pre-commit==2.12.0")
     execute("pre-commit", "install")
 
@@ -40,6 +43,8 @@ if __name__ == '__main__':
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
 
+    init_git()
+    
     if '{{ cookiecutter.install_precommit_hooks }}' == 'y':
         try:
             install_pre_commit_hooks()

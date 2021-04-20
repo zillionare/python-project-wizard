@@ -171,11 +171,6 @@ code:
 ``` bash
 cd mypackage
 
-# !!! uncomment the following line, if you didn't choose install pre-commit hooks at 
-# last step. If you chose 'yes', then cookiecutter have already done that for you, since 
-# pre-commit install need repo exist.
-
-# git init
 git add .
 git commit -m "Initial skeleton."
 git branch -M main
