@@ -60,11 +60,10 @@ The project layout should looks like:
 ├── LICENSE
 ├── mkdocs.yml
 ├── poetry.lock
-├── ppw_0419_01
+├── ppw_0420_01
 │   ├── cli.py
 │   ├── __init__.py
-│   ├── ppw_0419_01.py
-│   └── __pycache__
+│   └── ppw_0420_01.py
 ├── .pre-commit-config.yaml
 ├── pyproject.toml
 ├── pyrightconfig.json
@@ -72,12 +71,11 @@ The project layout should looks like:
 ├── site
 ├── tests
 │   ├── __init__.py
-│   ├── __pycache__
-│   └── test_ppw_0419_01.py
+│   └── test_ppw_0420_01.py
 └── tox.ini
 ```
 
-Here the project_slug is ppw_0419_01, when you genereate yours, it could be other name.
+Here the project_slug is ppw_0420_01, when you genereate yours, it could be other name.
 
 Also be noticed that there's pyproject.toml in this folder. This is the main
 configuration file of our project.
