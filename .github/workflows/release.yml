@@ -39,7 +39,7 @@ jobs:
           prWoLabels: true
           unreleased: true
           addSections: '{"documentation":{"prefix":"**Documentation:**","labels":["documentation"]}}'
-          sinceTag: 0.3
+          sinceTag: v1.0
           output: CHANGELOG.md
 
       - uses: actions/setup-python@v2
