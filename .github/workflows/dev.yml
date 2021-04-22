@@ -26,14 +26,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: olegtarasov/get-tag@v2.1
-        id: tagName
-        with:
-          tagRegexGroup: 1 # Optional. Default is 1.
-
-      - name: Check output
-        run: echo ${{ steps.tagName.outputs.tag }}
-
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
