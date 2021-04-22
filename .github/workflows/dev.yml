@@ -35,7 +35,7 @@ jobs:
           RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         run: |
           echo $RELEASE_VERSION
-          echo ${{ steps.vars.outputs.tag }
+          echo ${{ steps.vars.outputs.tag }}
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
