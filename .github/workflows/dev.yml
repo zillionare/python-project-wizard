@@ -33,9 +33,7 @@ jobs:
           tagRegexGroup: 1 # Optional. Default is 1.
 
       - name: Check output
-        with:
-          tagname: ${{ steps.tagName.outputs.tag }}
-        run: echo ${{ tagname }}
+        run: echo ${{ steps.tagName.outputs.tag }}
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
