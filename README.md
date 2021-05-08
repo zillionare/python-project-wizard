@@ -44,7 +44,7 @@ Generate a Python package project by simple run:
   ppw
 ```
 
-Then follow **[Tutorial](/tutorial)** to finish other configurations.
+Then follow **[Tutorial](/docs/tutorial.md)** to finish other configurations.
 
 # Credits
 
