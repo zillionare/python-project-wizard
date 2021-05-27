@@ -44,7 +44,8 @@ Generate a Python package project by simple run:
   ppw
 ```
 
-Then follow **[Tutorial](/docs/tutorial.md)** to finish other configurations.
+
+Then follow **[Tutorial](https://zillionare.github.io/cookiecutter-pypackage/tutorial/)** to finish other configurations.
 
 # Credits
 
