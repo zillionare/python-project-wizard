@@ -90,6 +90,7 @@ though.
 ```
 conda create -n mypackage python=3.8
 conda activate mypackage
+conda install -c conda-forge tox-conda
 ```
 
 You could choose your favorite python version here. 

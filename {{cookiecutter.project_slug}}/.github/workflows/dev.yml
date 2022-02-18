@@ -2,13 +2,13 @@
 
 name: dev workflow
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master,main,release ]
+    branches: [master, main, release]
   pull_request:
-    branches: [ master,main,release ]
+    branches: [master, main, release]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        python-versions: [3.6, 3.7, 3.8, 3.9]
+        python-versions: [3.7, 3.8, 3.9]
         os: [ubuntu-18.04, macos-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
@@ -38,8 +38,7 @@ jobs:
           pip install poetry tox tox-gh-actions
 
       - name: test with tox
-        run:
-          tox
+        run: tox
 
       - name: list files
         run: ls -l .
@@ -60,8 +59,7 @@ jobs:
           pip install poetry tox tox-gh-actions
 
       - name: test with tox
-        run:
-          tox
+        run: tox
 
       - name: list files
         run: ls -l .
