@@ -6,7 +6,7 @@ To install {{ cookiecutter.project_name }}, run this command in your
 terminal:
 
 ``` console
-$ pip install {{ cookiecutter.project_slug }}
+pip install {{ cookiecutter.project_slug }}
 ```
 
 This is the preferred method to install {{ cookiecutter.project_name
@@ -23,19 +23,19 @@ the [Github repo][].
 You can either clone the public repository:
 
 ``` console
-$ git clone git://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
+git clone git://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}
 ```
 
 Or download the [tarball][]:
 
 ``` console
-$ curl -OJL https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
+curl -OJL https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_slug }}/tarball/master
 ```
 
 Once you have a copy of the source, you can install it with:
 
 ``` console
-$ pip install .
+pip install .
 ```
 
   [pip]: https://pip.pypa.io
