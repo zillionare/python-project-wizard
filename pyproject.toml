@@ -46,8 +46,7 @@ dev = [
   "pytest-cov",
   "tox",
   "mkdocs-include-markdown-plugin",
-  "fire",
-  "pre-commit"
+  "fire"
 ]
 
 [tool.black]
