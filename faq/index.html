@@ -23,10 +23,6 @@
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
         
-          
-          
-          <meta name="theme-color" content="#02a6f2">
-        
       
     
     
@@ -49,10 +45,12 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="light-blue" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
       
   
     
@@ -406,6 +404,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#first-launch-of-pre-commit-failed" class="md-nav__link">
+    first launch of pre-commit failed
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -486,6 +491,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#first-launch-of-pre-commit-failed" class="md-nav__link">
+    first launch of pre-commit failed
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -535,7 +547,7 @@ some configuration.</p>
       output: CHANGELOG.md
 </code></pre></div>
 </td></tr></table>
-uncomment <code>#sinceTag</code> line and given an existed tag name in your project. If 
+uncomment <code>#sinceTag</code> line and given an existed tag name in your project. If
 there's none, you have to create one now.</p>
 </details>
 <details class="question" open="open"><summary>Question</summary><h2 id="why-not-travis-ci">Why not travis CI?<a class="headerlink" href="#why-not-travis-ci" title="Permanent link">&para;</a></h2>
@@ -548,8 +560,8 @@ further configuration, except access token. As to read the docs, you need to
 write v2 config file, plus several settings on web pages.</p>
 </details>
 <details class="question" open="open"><summary>Question</summary><h2 id="why-mkdocs-over-sphinx">Why mkdocs over sphinx?<a class="headerlink" href="#why-mkdocs-over-sphinx" title="Permanent link">&para;</a></h2>
-<p>reStructured Text and Sphinx is way to tedious, though powerful. With extension, 
-you'll find almost all features are available in mkdocs, in a neat and productive 
+<p>reStructured Text and Sphinx is way to tedious, though powerful. With extension,
+you'll find almost all features are available in mkdocs, in a neat and productive
 way. Poetry and Markdown, are the two key factors driven me develop this template.</p>
 </details>
 <details class="question" open="open"><summary>Question</summary><h2 id="what-are-the-configuration-items">What are the configuration items?<a class="headerlink" href="#what-are-the-configuration-items" title="Permanent link">&para;</a></h2>
@@ -609,37 +621,37 @@ way. Poetry and Markdown, are the two key factors driven me develop this templat
 
 The following appear in various parts of your generated project.
 
-full_name  
+full_name
 Your full name.
 
-email  
+email
 Your email address.
 
-github_username  
+github_username
 Your GitHub username.
 
-project_name  
+project_name
 The name of your new Python package project. This is used in
 documentation, so spaces and any characters are fine here.
 
-project_slug  
+project_slug
 The namespace of your Python package. This should be Python
 import-friendly. Typically, it is the slugified version of
 project_name.
 
-project_short_description  
+project_short_description
 A 1-sentence description of what your Python package does.
 
-release_date  
+release_date
 The date of the first release.
 
-pypi_username  
+pypi_username
 Your Python Package Index account username.
 
-year  
+year
 The year of the initial package copyright in the license file.
 
-version  
+version
 The starting version number of the package.
 
 install_precommit_hooks
@@ -653,7 +665,7 @@ one of `google, numpy, rst`. It&#39;s required by flake8-docstrings.
 The following package configuration options set up different features
 for your project.
 
-command_line_interface  
+command_line_interface
 Whether to create a console script using Python Fire. Console script
 entry point will match the project_slug. Options: \[&#39;fire&#39;, &quot;No
 command-line interface&quot;\]
@@ -666,6 +678,12 @@ at page repo &gt; settings &gt; secrtes, and add the following secrets:</p>
 <li>TEST_PYPI_API_TOKEN (required for publishing dev release to testpypi)</li>
 <li>PYPI_API_TOKEN (required for publish )</li>
 </ul>
+</details>
+<details class="question" open="open"><summary>Question</summary><h2 id="first-launch-of-pre-commit-failed">first launch of pre-commit failed<a class="headerlink" href="#first-launch-of-pre-commit-failed" title="Permanent link">&para;</a></h2>
+<p>first time launch <code>pre-commit run</code> failed with error: "[WARNING] The 'rev' field of
+repo 'https://github.com/ambv/black' appears to be a mutable reference
+(moving tag / branch)"</p>
+<p>Please follow the instructions to update pre-commit then run again.</p>
 </details>
                 
               

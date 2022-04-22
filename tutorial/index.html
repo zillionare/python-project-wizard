@@ -23,10 +23,6 @@
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
         
-          
-          
-          <meta name="theme-color" content="#02a6f2">
-        
       
     
     
@@ -49,10 +45,12 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="light-blue" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
       
   
     
@@ -616,9 +614,9 @@
                 <h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
 <details class="note"><summary>Note</summary><p>Did you find this article confusing? <a href="https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md">Edit this file</a> and pull a request!</p>
 </details>
-<p>To start with, you will need <a href="https://github.com/">GitHub</a>, <a href="https://pypi.org">Pypi</a> , <a href="https://test.pypi.org/">TestPyPi</a> and <a href="https://codecov.io/">Codecov</a> account. If 
-you don't have one, please follow the links to apply one before you get started on this 
-tutorial. </p>
+<p>To start with, you will need <a href="https://github.com/">GitHub</a>, <a href="https://pypi.org">Pypi</a> , <a href="https://test.pypi.org/">TestPyPi</a> and <a href="https://codecov.io/">Codecov</a> account. If
+you don't have one, please follow the links to apply one before you get started on this
+tutorial.</p>
 <p>If you are new to Git and GitHub, you should probably spend a few minutes on
 some of the tutorials at the top of the page at <a href="https://help.github.com/">GitHub Help</a></p>
 <h3 id="step-1-install-python-project-wizard-ppw">Step 1: Install Python Project Wizard (ppw)<a class="headerlink" href="#step-1-install-python-project-wizard-ppw" title="Permanent link">&para;</a></h3>
@@ -718,16 +716,18 @@ provided to <code>project_slug</code>.</p>
 <p>Also be noticed that there's pyproject.toml in this folder. This is the main
 configuration file of our project.</p>
 <h3 id="step-3-build-a-virtual-environment-for-your-development">Step 3: Build a virtual environment for your development<a class="headerlink" href="#step-3-build-a-virtual-environment-for-your-development" title="Permanent link">&para;</a></h3>
-<p>Now build a virtual python environment for your development, and develop your project 
+<p>Now build a virtual python environment for your development, and develop your project
 always in that environment from now on.</p>
-<p>You can choose either annaconda or virtualenv. I prefer annaconda (actually miniconda) 
+<p>You can choose either annaconda or virtualenv. I prefer annaconda (actually miniconda)
 though.</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create -n mypackage python=3.8
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>conda create -n mypackage python=3.8
 conda activate mypackage
+conda install -c conda-forge tox-conda
 </code></pre></div>
 </td></tr></table>
-<p>You could choose your favorite python version here. </p>
+<p>You could choose your favorite python version here.</p>
 <h3 id="step-4-install-dev-requirements">Step 4: Install Dev Requirements<a class="headerlink" href="#step-4-install-dev-requirements" title="Permanent link">&para;</a></h3>
 <p>You should still be in the folder named as <code>%proejct_slug</code>, which containing the
  <code>pyproject.toml</code> file.</p>
@@ -741,12 +741,12 @@ tox
 </code></pre></div>
 </td></tr></table>
 <p>We start with install poetry, since the whole project is managed by poetry. Then we
-installed extra dependency need by developer, such as documentation build tools, lint, 
+installed extra dependency need by developer, such as documentation build tools, lint,
 formatting and test tools etc.</p>
 <p>We also launch a smoke test here by running <code>tox</code>. This will give you a test report and
  lint report. You should see no errors except some lint warnings.</p>
-<details class="tips"><summary>Tips</summary><p>Extra dependencies are grouped into three groups, doc, dev and test for better 
-granularity. When you ship the package, dependencies in group doc, dev and test 
+<details class="tips"><summary>Tips</summary><p>Extra dependencies are grouped into three groups, doc, dev and test for better
+granularity. When you ship the package, dependencies in group doc, dev and test
 might not be shipped.</p>
 <p>As the developer, you will need install all the dependencies.</p>
 </details>
@@ -771,7 +771,7 @@ cookiecutter.</p>
 <li>PERSONAL_TOKEN, see <a href="https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">How to apply personal token</a></li>
 </ul>
 <h3 id="step-6-set-up-codecov-integration">Step 6: Set Up codecov integration<a class="headerlink" href="#step-6-set-up-codecov-integration" title="Permanent link">&para;</a></h3>
-<details class="tips" open="open"><summary>Tips</summary><p>If you have already setup codecov integration and configured access for all your 
+<details class="tips" open="open"><summary>Tips</summary><p>If you have already setup codecov integration and configured access for all your
 repositories, you can skip this step.</p>
 </details>
 <p>In your browser, visit <a href="https://github.com/apps/codecov">install codecov app</a>, you'll be landed at this page:</p>
@@ -779,7 +779,7 @@ repositories, you can skip this step.</p>
 <p>Click on the green <code>install</code> button at top right, choose <code>all repositories</code> then click
 on <code>install</code> button, following directions until all set.</p>
 <h3 id="step-7-upload-code-to-github">Step 7: Upload code to github<a class="headerlink" href="#step-7-upload-code-to-github" title="Permanent link">&para;</a></h3>
-<p>Back to your develop environment, find the folder named after the <code>[project_slug]</code>. 
+<p>Back to your develop environment, find the folder named after the <code>[project_slug]</code>.
 Move into this folder, and then setup git to use your GitHub repo and upload the
 code:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -801,7 +801,7 @@ git push -u origin main
 package name.</p>
 <p>You'll need a ssh key to push the repo. You can <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/">Generate</a> a key or
 <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/">Add</a> an existing one.</p>
-<details class="warning" open="open"><summary>Warning</summary><p>if you answered 'yes' to the question if install pre-commit hooks at last step, 
+<details class="warning" open="open"><summary>Warning</summary><p>if you answered 'yes' to the question if install pre-commit hooks at last step,
 then you should find pre-commit be invoked when you run <code>git commit</code>, and some files
  may be modified by hooks. If so, please add these files and <strong>commit again</strong>.</p>
 </details>
@@ -812,7 +812,7 @@ click on actions link, you should find screen like this:</p>
 <p>There should be one workflow running. After it finished, go to [testpyi], check if a
 new artifact is published under the name {{ cookiecutter.project_slug }}</p>
 <h3 id="step-8-check-documentation">Step 8. Check documentation<a class="headerlink" href="#step-8-check-documentation" title="Permanent link">&para;</a></h3>
-<p>Documentation will be published and available at 
+<p>Documentation will be published and available at
   <a href="https://{your_github_account}.github.io/{your_repo}">https://{your_github_account}.github.io/{your_repo}</a> once:</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
@@ -827,7 +827,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}</p>
 </td></tr></table>
 <p>then check your documentation at <a href="https://{your_github_account}.github.io/{your_repo}">https://{your_github_account}.github.io/{your_repo}</a></p>
 <h3 id="step-9-make-official-release">Step 9. Make official release<a class="headerlink" href="#step-9-make-official-release" title="Permanent link">&para;</a></h3>
-<p>After done with your phased development, switch to releas branch, following 
+<p>After done with your phased development, switch to releas branch, following
   instructions at <a href="/pypi_release_checklist">release checklist</a>, trigger first official release and check
   result at <a href="https://pypi.org">PYPI</a>.</p>
                 
