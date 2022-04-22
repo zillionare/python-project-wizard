@@ -19,7 +19,7 @@
           #sinceTag: v0.1.1
           output: CHANGELOG.md
     ```
-    uncomment `#sinceTag` line and given an existed tag name in your project. If 
+    uncomment `#sinceTag` line and given an existed tag name in your project. If
     there's none, you have to create one now.
 
 ???+ Question
@@ -35,13 +35,13 @@
 
 ???+ Question
     # Why mkdocs over sphinx?
-    reStructured Text and Sphinx is way to tedious, though powerful. With extension, 
-    you'll find almost all features are available in mkdocs, in a neat and productive 
+    reStructured Text and Sphinx is way to tedious, though powerful. With extension,
+    you'll find almost all features are available in mkdocs, in a neat and productive
     way. Poetry and Markdown, are the two key factors driven me develop this template.
 
 ???+ Question
     # What are the configuration items?
-    
+
     Here is a list:
 
     ```
@@ -49,37 +49,37 @@
 
     The following appear in various parts of your generated project.
 
-    full_name  
+    full_name
     Your full name.
 
-    email  
+    email
     Your email address.
 
-    github_username  
+    github_username
     Your GitHub username.
 
-    project_name  
+    project_name
     The name of your new Python package project. This is used in
     documentation, so spaces and any characters are fine here.
 
-    project_slug  
+    project_slug
     The namespace of your Python package. This should be Python
     import-friendly. Typically, it is the slugified version of
     project_name.
 
-    project_short_description  
+    project_short_description
     A 1-sentence description of what your Python package does.
 
-    release_date  
+    release_date
     The date of the first release.
 
-    pypi_username  
+    pypi_username
     Your Python Package Index account username.
 
-    year  
+    year
     The year of the initial package copyright in the license file.
 
-    version  
+    version
     The starting version number of the package.
 
     install_precommit_hooks
@@ -93,7 +93,7 @@
     The following package configuration options set up different features
     for your project.
 
-    command_line_interface  
+    command_line_interface
     Whether to create a console script using Python Fire. Console script
     entry point will match the project_slug. Options: \['fire', "No
     command-line interface"\]
@@ -105,3 +105,12 @@
     - PERSONAL_TOKEN (required for publishing document to git pages)
     - TEST_PYPI_API_TOKEN (required for publishing dev release to testpypi)
     - PYPI_API_TOKEN (required for publish )
+
+???+ Question
+    # first launch of pre-commit failed
+
+    first time launch `pre-commit run` failed with error: "[WARNING] The 'rev' field of
+    repo 'https://github.com/ambv/black' appears to be a mutable reference
+    (moving tag / branch)"
+
+    Please follow the instructions to update pre-commit then run again.

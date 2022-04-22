@@ -44,4 +44,4 @@
 
 ## Credits
 
-This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [zillionare/cookiecutter-pypackage](https://github.com/zillionare/cookiecutter-pypackage) project template.
+This package was created with [Cookiecutter](https://github.com/audreyr/cookiecutter) and the [ppw](https://pypi.org/project/ppw/) tool. For more information, please visit the [project page](https://zillionare.github.io/python-project-wizard/).

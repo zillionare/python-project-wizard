@@ -3,9 +3,9 @@
 ??? Note
     Did you find this article confusing? [Edit this file] and pull a request!
 
-To start with, you will need [GitHub], [Pypi] , [TestPyPi] and [Codecov] account. If 
-you don't have one, please follow the links to apply one before you get started on this 
-tutorial. 
+To start with, you will need [GitHub], [Pypi] , [TestPyPi] and [Codecov] account. If
+you don't have one, please follow the links to apply one before you get started on this
+tutorial.
 
 If you are new to Git and GitHub, you should probably spend a few minutes on
 some of the tutorials at the top of the page at [GitHub Help]
@@ -81,10 +81,10 @@ Also be noticed that there's pyproject.toml in this folder. This is the main
 configuration file of our project.
 
 ## Step 3: Build a virtual environment for your development
-Now build a virtual python environment for your development, and develop your project 
+Now build a virtual python environment for your development, and develop your project
 always in that environment from now on.
 
-You can choose either annaconda or virtualenv. I prefer annaconda (actually miniconda) 
+You can choose either annaconda or virtualenv. I prefer annaconda (actually miniconda)
 though.
 
 ```
@@ -93,7 +93,7 @@ conda activate mypackage
 conda install -c conda-forge tox-conda
 ```
 
-You could choose your favorite python version here. 
+You could choose your favorite python version here.
 ## Step 4: Install Dev Requirements
 
 You should still be in the folder named as `%proejct_slug`, which containing the
@@ -109,7 +109,7 @@ tox
 ```
 
 We start with install poetry, since the whole project is managed by poetry. Then we
-installed extra dependency need by developer, such as documentation build tools, lint, 
+installed extra dependency need by developer, such as documentation build tools, lint,
 formatting and test tools etc.
 
 We also launch a smoke test here by running `tox`. This will give you a test report and
@@ -117,8 +117,8 @@ We also launch a smoke test here by running `tox`. This will give you a test rep
 
 ??? Tips
 
-    Extra dependencies are grouped into three groups, doc, dev and test for better 
-    granularity. When you ship the package, dependencies in group doc, dev and test 
+    Extra dependencies are grouped into three groups, doc, dev and test for better
+    granularity. When you ship the package, dependencies in group doc, dev and test
     might not be shipped.
 
     As the developer, you will need install all the dependencies.
@@ -151,7 +151,7 @@ Then goto repo > settings > secrets, click on 'New repository secret', add the f
 
 ???+ Tips
 
-    If you have already setup codecov integration and configured access for all your 
+    If you have already setup codecov integration and configured access for all your
     repositories, you can skip this step.
 
 In your browser, visit [install codecov app], you'll be landed at this page:
@@ -163,7 +163,7 @@ on `install` button, following directions until all set.
 
 ## Step 7: Upload code to github
 
-Back to your develop environment, find the folder named after the `[project_slug]`. 
+Back to your develop environment, find the folder named after the `[project_slug]`.
 Move into this folder, and then setup git to use your GitHub repo and upload the
 code:
 
@@ -185,7 +185,7 @@ You'll need a ssh key to push the repo. You can [Generate] a key or
 
 ???+ Warning
 
-    if you answered 'yes' to the question if install pre-commit hooks at last step, 
+    if you answered 'yes' to the question if install pre-commit hooks at last step,
     then you should find pre-commit be invoked when you run `git commit`, and some files
      may be modified by hooks. If so, please add these files and **commit again**.
 
@@ -201,7 +201,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 
 ## Step 8. Check documentation
 
-  Documentation will be published and available at 
+  Documentation will be published and available at
   <https://{your_github_account}.github.io/{your_repo}> once:
 
     1. the branch is release
@@ -218,7 +218,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 
 ## Step 9. Make official release
 
-  After done with your phased development, switch to releas branch, following 
+  After done with your phased development, switch to releas branch, following
   instructions at [release checklist](/pypi_release_checklist), trigger first official release and check
   result at [PYPI].
 

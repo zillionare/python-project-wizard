@@ -1,7 +1,7 @@
 {
-  "full_name": "Aaron Yang",
-  "email": "code@jieyu.ai",
-  "github_username": "zillionare",
+  "full_name": "",
+  "email": "",
+  "github_username": "",
   "project_name": "Python Boilerplate",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "Skeleton project created by Python Project Wizard (ppw)",

@@ -102,3 +102,4 @@ cookiecutter-pypackage-env/
 
 # mkdocs
 site/
+.history/

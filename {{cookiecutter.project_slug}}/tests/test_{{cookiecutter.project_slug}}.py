@@ -4,8 +4,10 @@
 
 {% if cookiecutter.use_pytest == 'y' -%}
 import pytest
+
 {%- else -%}
 import unittest
+
 {%- endif %}
 
 {%- if cookiecutter.use_pytest == 'y' %}

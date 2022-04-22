@@ -3,6 +3,7 @@
 {% if cookiecutter.command_line_interface|lower == 'fire' -%}
 import fire
 
+
 def help():
     print("{{ cookiecutter.project_slug }}")
     print("=" * len("{{ cookiecutter.project_slug }}"))

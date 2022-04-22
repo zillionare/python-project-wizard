@@ -1,10 +1,10 @@
 # Python Project Wizard
 
-A tool for creating skeleton python project, built with popular develop tools and 
+A tool for creating skeleton python project, built with popular develop tools and
 conform to best practice.
 
 [![Version](http://img.shields.io/pypi/v/ppw?color=brightgreen)](https://pypi.python.org/pypi/ppw)
-[![CI Status](https://github.com/zillionare/cookiecutter-pypackage/actions/workflows/release.yml/badge.svg)](https://github.com/zillionare/cookiecutter-pypackage)
+[![CI Status](https://github.com/zillionare/python-project-wizard/actions/workflows/release.yml/badge.svg)](https://github.com/zillionare/python-project-wizard)
 [![Dowloads](https://img.shields.io/pypi/dm/ppw)](https://pypi.org/project/ppw/)
 [![License](https://img.shields.io/pypi/l/ppw)](https://opensource.org/licenses/BSD-2-Clause)
 ![Python Versions](https://img.shields.io/pypi/pyversions/ppw)
@@ -44,7 +44,7 @@ Generate a Python package project by simple run:
   ppw
 ```
 
-Then follow **[Tutorial](https://zillionare.github.io/cookiecutter-pypackage/tutorial/)** to finish other configurations.
+Then follow **[Tutorial](https://zillionare.github.io/python-project-wizard/tutorial/)** to finish other configurations.
 
 # Credits
 
@@ -65,3 +65,7 @@ This repo is forked from [audreyr/cookiecutter-pypackage](https://github.com/aud
 [github actions]: https://github.com/features/actions
 [Git Pages]: https://pages.github.com
 [Pre-commit hooks]: https://pre-commit.com/
+
+# More projects by same author
+## cfg4py
+[cfg4py](https://pypi.org/project/cfg4py/) is a great tool for managing configuration files, supporting configuration for different environments (dev, prodction and test), automatically converting yaml-based configuration to python class, so you can access configuration items by attribute, thus enable auto-completion (by IDE). It also support live-reload, remote central configuration, config template and more.

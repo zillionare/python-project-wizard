@@ -32,4 +32,3 @@
 [github actions]: https://github.com/features/actions
 [Git Pages]: https://pages.github.com
 [Pre-commit hooks]: https://pre-commit.com/
-
