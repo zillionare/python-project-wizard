@@ -46,7 +46,20 @@ def init_git():
             cwd=PROJECT_DIRECTORY,
         )
         execute("git", "init", cwd=PROJECT_DIRECTORY)
-
+        execute(
+            "git",
+            "config",
+            "user.name",
+            "{{ cookiecutter.full_name }}",
+            cwd=PROJECT_DIRECTORY
+        )
+        execute(
+            "git",
+            "config",
+            "user.email",
+            "{{ cookiecutter.email }}",
+            cwd=PROJECT_DIRECTORY
+        )
 
 def install_pre_commit_hooks():
     execute(sys.executable, "-m", "pip", "install", "--user", "pre-commit")

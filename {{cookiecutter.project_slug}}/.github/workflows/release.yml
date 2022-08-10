@@ -1,13 +1,14 @@
 # Publish package on release branch if it's tagged with 'v*'
 
-name: release & publish workflow
+name: build & release
 
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
+    branch: [main, master]
     tags:
-      - "v*.*.*"
+      - 'v*'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   release:
     name: Create Release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
@@ -26,16 +27,18 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checks-out
-        uses: actions/checkout@v2
-      - name: "Build Changelog"
+      - uses: actions/checkout@v2
+
+      - name: build change log
         id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v2.9.0
+        uses: mikepenz/release-changelog-builder-action@v3.2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-versions }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -45,6 +48,10 @@ jobs:
         run: |
           poetry install -E doc
           poetry run mkdocs build
+          git config --global user.name Docs deploy
+          git config --global user.email docs@dummy.bot.com
+          poetry run mike deploy `poetry version --short`
+          poetry run mike set-default `poetry version --short`
 
       - name: publish documentation
         uses: peaceiris/actions-gh-pages@v3
@@ -56,22 +63,19 @@ jobs:
         run: >-
           poetry build
 
-      - name: show temporary files
-        run: >-
-          ls -l
-
-      - name: create github release
+      - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body_path: ./CHANGELOG.md
-          files: dist/*.whl
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.build_changelog.outputs.changelog }}
           draft: false
           prerelease: false
 
-      - name: create pypi release
+      - name: publish to PYPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__

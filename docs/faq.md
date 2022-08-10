@@ -1,26 +1,3 @@
-???+ Question
-    # Why github workflow `release & publish` failed?
-    We have used a github action `heinrichreimer/github-changelog-generator-action` to
-    generate change log automatically for your project. However, this action requires
-    some configuration.
-
-    Goto .github/workflows/release.yml (in your project folder), find the following:
-    ```
-        - name: generate change log
-        uses: heinrichreimer/github-changelog-generator-action@v2.1.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issues: true
-          issuesWoLabels: true
-          pullRequests: true
-          prWoLabels: true
-          unreleased: true
-          addSections: '{"documentation":{"prefix":"**Documentation:**","labels":["documentation"]}}'
-          #sinceTag: v0.1.1
-          output: CHANGELOG.md
-    ```
-    uncomment `#sinceTag` line and given an existed tag name in your project. If
-    there's none, you have to create one now.
 
 ???+ Question
     # Why not travis CI?
@@ -34,10 +11,31 @@
     write v2 config file, plus several settings on web pages.
 
 ???+ Question
-    # Why mkdocs over sphinx?
+    # Why mkdocs instead of sphinx?
     reStructured Text and Sphinx is way to tedious, though powerful. With extension,
     you'll find almost all features are available in mkdocs, in a neat and productive
     way. Poetry and Markdown, are the two key factors driven me develop this template.
+
+???+ How to trigger a release build?
+    Once you've tagged either of (main, master) branch with `v`(for example, v1.0), then github actions will trigger a release build and finally publish documentation to https://{your_github_account}.github.io/{your_repo_slug} and push a wheels to pypi.
+
+    You can also manually trigger this one:
+    ```
+    git tag -a v1.0 -m "Release v1.0"
+    git push --tags
+    ```
+    then check on github to see if actions is executing. Once it's done successfully.
+
+???+ How to manually publish documentation?
+    By default, every push to github will trigger a documentation dev build, with the name is ${poetry version --short}-dev. And every tag starts with 'v' on main/master branch will cause a release build, and documentation will be built too.
+
+    However, by any chances, you can manually build and publish your documentation with:
+
+    ```
+    poetry run mike deploy -p `poetry version --short`
+    poetry run mike set-default -p `poetry version --short`
+    ```
+    The above commands simply build documentation locally and push to github, then github will publish it.
 
 ???+ Question
     # What are the configuration items?

@@ -1,3 +1,17 @@
+# History
+!!! Info
+    `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
+
+## v1.2
+* [#7](https://github.com/zillionare/python-project-wizard/issues/7) documentatioin will now support multiple versions
+* [#8](https://github.com/zillionare/python-project-wizard/issues/8) add .docstring.tpl to project
+* [#10](https://github.com/zillionare/python-project-wizard/issues/10) fixed.
+* [#11](https://github.com/zillionare/python-project-wizard/issues/11) fixed.
+* [#12](https://github.com/zillionare/python-project-wizard/issues/12) replaced.
+* [#13](https://github.com/zillionare/python-project-wizard/issues/13) implemented. Only tested with vscode, please have autodocstrings extension installed.
+* [#14](https://github.com/zillionare/python-project-wizard/issues/14) implemented.
+* [#15](https://github.com/zillionare/python-project-wizard/issues/15) done.
+* [#16](https://github.com/zillionare/python-project-wizard/issues/16) fixed
 # v1.0
 ***first release with the following features:***
 

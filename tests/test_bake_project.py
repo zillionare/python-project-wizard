@@ -178,7 +178,7 @@ def test_not_using_pytest(cookies):
         lines = dep_file_path.readlines()
         assert 'pytest = "*"\n' not in lines
         # Test contents of test file
-        test_file_path = result.project.join("tests/test_python_boilerplate.py")
+        test_file_path = result.project.join("tests/test_app.py")
         lines = test_file_path.readlines()
         assert "import unittest" in "".join(lines)
         assert "import pytest" not in "".join(lines)

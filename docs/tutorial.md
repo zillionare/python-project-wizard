@@ -38,6 +38,7 @@ The project layout should looks like:
 ├── AUTHORS.md
 ├── CONTRIBUTING.md
 ├── .coveragerc
+├── .docstring.tpl
 ├── dist
 ├── docs
 │   ├── api.md
@@ -63,7 +64,7 @@ The project layout should looks like:
 ├── ppw_0420_01
 │   ├── cli.py
 │   ├── __init__.py
-│   └── ppw_0420_01.py
+│   └── app.py
 ├── .pre-commit-config.yaml
 ├── pyproject.toml
 ├── pyrightconfig.json
@@ -115,7 +116,7 @@ formatting and test tools etc.
 We also launch a smoke test here by running `tox`. This will give you a test report and
  lint report. You should see no errors except some lint warnings.
 
-??? Tips
+???+ Tips
 
     Extra dependencies are grouped into three groups, doc, dev and test for better
     granularity. When you ship the package, dependencies in group doc, dev and test
@@ -204,7 +205,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
   Documentation will be published and available at
   <https://{your_github_account}.github.io/{your_repo}> once:
 
-    1. the branch is release
+    1. the branch is either main or master
     2. the commit is tagged, and the tag name is started with 'v' (lower case)
     3. build/testing executed by github CI passed
 
@@ -216,11 +217,23 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 
   then check your documentation at <https://{your_github_account}.github.io/{your_repo}>
 
+  or you can serve it locally by:
+
+  ```
+  mkdocs serve -a 0.0.0.0:8000
+  ```
+  
+  then open your browser, visit your dev machine on port 8000.
+
+  ???+ Info
+    Though we used mkdocs here, however, in order to support multiple versions of documentation, we actually use mike in github actions.
+
 ## Step 9. Make official release
 
-  After done with your phased development, switch to releas branch, following
-  instructions at [release checklist](/pypi_release_checklist), trigger first official release and check
+  After done with your phased development, switch to either of (main, master) branch, following
+  instructions at [release checklist](/python-project-wizard/pypi_release_checklist), trigger first official release and check
   result at [PYPI].
+  
 
 
 [Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md
