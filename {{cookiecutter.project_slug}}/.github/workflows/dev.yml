@@ -82,6 +82,12 @@ jobs:
           poetry run mike deploy "`poetry version --short`.dev"
           poetry run mike set-default "`poetry version --short`.dev"
 
+      - name: publish documentation
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: ./site
+          
       - name: Build wheels and source tarball
         run: |
           poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
