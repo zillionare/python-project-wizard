@@ -62,7 +62,7 @@ def init_git():
         )
 
 def install_pre_commit_hooks():
-    execute(sys.executable, "-m", "pip", "install", "--user", "pre-commit")
+    execute(sys.executable, "-m", "pip", "install", "pre-commit")
     execute("pre-commit", "install")
 
 
