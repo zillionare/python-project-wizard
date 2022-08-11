@@ -14,6 +14,7 @@
 * [#16](https://github.com/zillionare/python-project-wizard/issues/16) fixed
 * [#18](https://github.com/zillionare/python-project-wizard/issues/18) fixed
 * [#19](https://github.com/zillionare/python-project-wizard/issues/19) implemented.
+* [#20](https://github.com/zillionare/python-project-wizard/issues/20) implemented. You can refer by using ${{ env.package_version_short }} and ${{ env.package_version_full }} now.
 ## v1.0
 ***first release with the following features:***
 
