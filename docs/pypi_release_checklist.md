@@ -1,8 +1,7 @@
-# PyPI Release Checklist
 
 ## For Every Release
 
-0.  Merge your change from features/release branch to master/main.
+0.  Merge your changes from features/release branch to master/main.
 
 1.  Update HISTORY.md
 
@@ -46,11 +45,12 @@
     notes, and roadmap display properly. If tox test passed, this should be ok, since
     we have already run twine check during tox test.
 
-## About This Checklist
+???+ Info
+    # About This Checklist
 
-This checklist is adapted from:
+    This checklist is adapted from:
 
--   <https://gist.github.com/audreyr/5990987>
--   <https://gist.github.com/audreyr/9f1564ea049c14f682f4>
+    -   <https://gist.github.com/audreyr/5990987>
+    -   <https://gist.github.com/audreyr/9f1564ea049c14f682f4>
 
-It's assumed that you are using all features of [Python Project Wizard](https://zillionare.github.io/python-project-wizard).
+    It's assumed that you are using all features of [Python Project Wizard](https://zillionare.github.io/python-project-wizard).

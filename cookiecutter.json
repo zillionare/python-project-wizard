@@ -5,7 +5,6 @@
   "project_name": "Python Boilerplate",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
   "project_short_description": "Skeleton project created by Python Project Wizard (ppw)",
-  "pypi_username": "{{ cookiecutter.github_username }}",
   "version": "0.1.0",
   "use_pytest": "y",
   "add_pyup_badge": "n",
@@ -13,6 +12,6 @@
   "create_author_file": "y",
   "open_source_license": ["MIT", "BSD-3-Clause", "ISC", "Apache-2.0", "GPL-3.0-only", "Not open source"],
   "docstrings_style": ["google", "numpy", "rst"],
-  "install_precommit_hooks": "y",
+  "init_dev_env": "y",
   "_copy_without_render": ["docs/history.md", "docs/contributing.md", "docs/authors.md", "docs/index.md", ".github/workflows/*.yml", ".docstring.tpl"]
 }

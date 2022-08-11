@@ -12,7 +12,9 @@
 * [#14](https://github.com/zillionare/python-project-wizard/issues/14) implemented.
 * [#15](https://github.com/zillionare/python-project-wizard/issues/15) done.
 * [#16](https://github.com/zillionare/python-project-wizard/issues/16) fixed
-# v1.0
+* [#18](https://github.com/zillionare/python-project-wizard/issues/18) fixed
+* [#19](https://github.com/zillionare/python-project-wizard/issues/19) implemented.
+## v1.0
 ***first release with the following features:***
 
 1. [Poetry]: Manage version, dependancy, build and release

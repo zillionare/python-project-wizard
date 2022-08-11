@@ -16,7 +16,9 @@
     you'll find almost all features are available in mkdocs, in a neat and productive
     way. Poetry and Markdown, are the two key factors driven me develop this template.
 
-???+ How to trigger a release build?
+???+ Question
+    # How to trigger a release build?
+
     Once you've tagged either of (main, master) branch with `v`(for example, v1.0), then github actions will trigger a release build and finally publish documentation to https://{your_github_account}.github.io/{your_repo_slug} and push a wheels to pypi.
 
     You can also manually trigger this one:
@@ -26,7 +28,8 @@
     ```
     then check on github to see if actions is executing. Once it's done successfully.
 
-???+ How to manually publish documentation?
+???+ Question
+    # How to manually publish documentation?
     By default, every push to github will trigger a documentation dev build, with the name is ${poetry version --short}-dev. And every tag starts with 'v' on main/master branch will cause a release build, and documentation will be built too.
 
     However, by any chances, you can manually build and publish your documentation with:
@@ -103,12 +106,3 @@
     - PERSONAL_TOKEN (required for publishing document to git pages)
     - TEST_PYPI_API_TOKEN (required for publishing dev release to testpypi)
     - PYPI_API_TOKEN (required for publish )
-
-???+ Question
-    # first launch of pre-commit failed
-
-    first time launch `pre-commit run` failed with error: "[WARNING] The 'rev' field of
-    repo 'https://github.com/ambv/black' appears to be a mutable reference
-    (moving tag / branch)"
-
-    Please follow the instructions to update pre-commit then run again.

@@ -3,22 +3,35 @@
 ??? Note
     Did you find this article confusing? [Edit this file] and pull a request!
 
-To start with, you will need [GitHub], [Pypi] , [TestPyPi] and [Codecov] account. If
-you don't have one, please follow the links to apply one before you get started on this
-tutorial.
+To start with, you will need [GitHub], [Pypi] , [TestPyPi] and [Codecov] account. If you don't have one, please follow the links to apply one before getting started on this tutorial.
 
-If you are new to Git and GitHub, you should probably spend a few minutes on
-some of the tutorials at the top of the page at [GitHub Help]
+If you are new to Git and GitHub, you should probably spend a few minutes on some of the tutorials at [GitHub Help]
 
 ## Step 1: Install Python Project Wizard (ppw)
 
-Install ppw:
+We'll need `ppw` to generate a skeleton project. Following the instructions to install `ppw` on to your machine. 
 
 ``` bash
 pip install ppw
 ```
 
-## Step 2: Generate Your Package
+If virtual environment is used during your developement, install `ppw` as global.
+## Step 2: Build a virtual environment for your development
+It's best practice that always developing your project in dedicated python virtual environment. So let's start from creating a virtual environment now:
+
+You may choose either annaconda or virtualenv， annaconda (actually miniconda) is preferred though.
+
+```
+conda create -n mypackage python=3.8
+conda activate mypackage
+conda install -c conda-forge tox-conda
+```
+
+Choose python version on your own decision. Be noticed that we're now at a virtual env called `mypackage`
+## Step 3: Generate Your Package
+
+!!!Important
+    Make sure run the following command under `mypackage` virtual env.
 
 Now it's time to generate your Python package.
 
@@ -31,7 +44,13 @@ Run the following command and feed with answers:
 Finally a new folder will be created under current folder, the name is the answer you
 provided to `project_slug`.
 
-The project layout should looks like:
+At last step, it'll ask you `ppw` should performe initialization for you. If the answer is 'yes', then `ppw` will:
+
+1. install pre-commit hooks
+2. install poetry
+3. install necessary dependencies which required by test and documentation. These deps will include pytest, tox, mkdocs and etc.
+
+The project layout should look like:
 
 ```
 .
@@ -76,26 +95,16 @@ The project layout should looks like:
 └── tox.ini
 ```
 
-Here the project_slug is ppw_0420_01, when you genereate yours, it could be other name.
+Here the project_slug is ppw_0420_01. When you genereate yours, it could be other name.
 
 Also be noticed that there's pyproject.toml in this folder. This is the main
 configuration file of our project.
 
-## Step 3: Build a virtual environment for your development
-Now build a virtual python environment for your development, and develop your project
-always in that environment from now on.
-
-You can choose either annaconda or virtualenv. I prefer annaconda (actually miniconda)
-though.
-
-```
-conda create -n mypackage python=3.8
-conda activate mypackage
-conda install -c conda-forge tox-conda
-```
-
 You could choose your favorite python version here.
 ## Step 4: Install Dev Requirements
+
+!!!Important
+    Skip this step if you've answered 'yes' to the question `init_dev_env`. They're performed automatically if the answer is 'yes'.
 
 You should still be in the folder named as `%proejct_slug`, which containing the
  `pyproject.toml` file.
@@ -106,15 +115,19 @@ virtual environment:
 ``` bash
 pip install poetry
 poetry install -E doc -E dev -E test
+```
+
+We started with installing poetry, since the whole project is managed by poetry. Then we
+installed extra dependency need by developer, such as documentation building tools, lint,
+formatting and testing tools etc.
+
+## Step 5: Smoke test
+Run the following command now:
+```
 tox
 ```
 
-We start with install poetry, since the whole project is managed by poetry. Then we
-installed extra dependency need by developer, such as documentation build tools, lint,
-formatting and test tools etc.
-
-We also launch a smoke test here by running `tox`. This will give you a test report and
- lint report. You should see no errors except some lint warnings.
+This will give you a test report and a lint report. You should see no errors except some lint warnings.
 
 ???+ Tips
 
@@ -126,7 +139,7 @@ We also launch a smoke test here by running `tox`. This will give you a test rep
 
 ??? Tips
 
-    if you found erros like the following during tox run:
+    if you found erros like the following during tox runs:
     ```
     ERROR: InterpreterNotFound: python3.9
     ```
@@ -135,11 +148,10 @@ We also launch a smoke test here by running `tox`. This will give you a test rep
     machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
     remove it).
 
-## Step 5: Create a GitHub Repo
+## Step 6: Create a GitHub Repo
 
 Go to your GitHub account and create a new repo named `mypackage`, where
-`mypackage` matches the `[project_slug]` from your answers to running
-cookiecutter.
+`mypackage` matches the `[project_slug]` from your answers when running `ppw`
 
 Then goto repo > settings > secrets, click on 'New repository secret', add the following
  secrets:
@@ -148,7 +160,7 @@ Then goto repo > settings > secrets, click on 'New repository secret', add the f
 - PYPI_API_TOKEN, see [How to apply pypi token]
 - PERSONAL_TOKEN, see [How to apply personal token]
 
-## Step 6: Set Up codecov integration
+## Step 7: Setup codecov integration
 
 ???+ Tips
 
@@ -160,12 +172,12 @@ In your browser, visit [install codecov app], you'll be landed at this page:
 ![](http://images.jieyu.ai/images/202104/20210419175222.png)
 
 Click on the green `install` button at top right, choose `all repositories` then click
-on `install` button, following directions until all set.
+on `install` button, following directions until all sets.
 
-## Step 7: Upload code to github
+## Step 8: Upload code to github
 
 Back to your develop environment, find the folder named after the `[project_slug]`.
-Move into this folder, and then setup git to use your GitHub repo and upload the
+Go to this folder, and then setup git to use your GitHub repo and upload the
 code:
 
 ``` bash
@@ -181,18 +193,18 @@ git push -u origin main
 Where `myusername` and `mypackage` are adjusted for your username and
 package name.
 
-You'll need a ssh key to push the repo. You can [Generate] a key or
+You'll need a ssh key to push the repo. You could [Generate] a key or
 [Add] an existing one.
 
 ???+ Warning
 
-    if you answered 'yes' to the question if install pre-commit hooks at last step,
-    then you should find pre-commit be invoked when you run `git commit`, and some files
+    if you answered 'yes' to the question if `init_dev_env` at last step,
+    then you should find `pre-commit` was invoked when you run `git commit`, and some files
      may be modified by hooks. If so, please add these files and **commit again**.
 
-### Check result
+### Step 9: Check the CI result
 
-After pushing your code to github, goto github web page, navigate to your repo, then
+After pushing your code to github, go to github web page, navigate to your repo, then
 click on actions link, you should find screen like this:
 
 ![](http://images.jieyu.ai/images/202104/20210419170304.png)
@@ -200,7 +212,7 @@ click on actions link, you should find screen like this:
 There should be one workflow running. After it finished, go to [testpyi], check if a
 new artifact is published under the name {{ cookiecutter.project_slug }}
 
-## Step 8. Check documentation
+## Step 10. Check the documentation
 
   Documentation will be published and available at
   <https://{your_github_account}.github.io/{your_repo}> once:
@@ -209,7 +221,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
     2. the commit is tagged, and the tag name is started with 'v' (lower case)
     3. build/testing executed by github CI passed
 
-  If you'd like to see what it's look like now, you could run the followng command:
+  If you'd like to see what it looks like now, you could run the followng command:
 
   ```
   mkdocs gh-deploy
@@ -225,10 +237,10 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
   
   then open your browser, visit your dev machine on port 8000.
 
-  ???+ Info
+???+ Info
     Though we used mkdocs here, however, in order to support multiple versions of documentation, we actually use mike in github actions.
 
-## Step 9. Make official release
+## Step 11. Make an official release
 
   After done with your phased development, switch to either of (main, master) branch, following
   instructions at [release checklist](/python-project-wizard/pypi_release_checklist), trigger first official release and check

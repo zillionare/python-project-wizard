@@ -14,9 +14,7 @@ from cookiecutter.utils import rmtree
 
 
 _DEPENDENCY_FILE = "pyproject.toml"
-_INSTALL_DEPS_COMMANDS = [
-    "poetry install",
-]
+_INSTALL_DEPS_COMMANDS = ["poetry install"]
 
 
 def build_commands(commands):

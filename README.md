@@ -1,7 +1,7 @@
 # Python Project Wizard
 
 A tool for creating skeleton python project, built with popular develop tools and
-conform to best practice.
+conform to the best practice.
 
 [![Version](http://img.shields.io/pypi/v/ppw?color=brightgreen)](https://pypi.python.org/pypi/ppw)
 [![CI Status](https://github.com/zillionare/python-project-wizard/actions/workflows/release.yml/badge.svg)](https://github.com/zillionare/python-project-wizard)
@@ -46,7 +46,7 @@ Generate a Python package project by simple run:
   ppw
 ```
 
-Then follow **[Tutorial]** to finish other configurations.
+Then follow the **[Tutorial]** to finish configurations.
 
 # Credits
 
@@ -75,4 +75,4 @@ This repo is forked from [audreyr/cookiecutter-pypackage], and borrowed some ide
 
 # Links
 ## cfg4py
-[cfg4py](https://pypi.org/project/cfg4py/) is a great tool for managing configuration files, supporting configuration for different environments (dev, prodction and test), automatically converting yaml-based configuration to python class, so you can access configuration items by attribute, thus enable auto-completion (by IDE). It also support live-reload, remote central configuration, config template and more.
+[cfg4py](https://pypi.org/project/cfg4py/) is a great tool for managing configuration files, supporting configuration for different environments (dev, prodction and test), automatically converting yaml-based configuration to python class, so, you can access configuration items by attribute, thus, enable auto-completion (by IDE). It also supports live-reload, remoting central configuration, config template and more.

@@ -2,6 +2,10 @@
 import os
 import subprocess
 import sys
+import asyncio
+from hooks.aioproc import aioprocess, async_run
+import colorama
+from colorama import Fore, Style
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
@@ -13,25 +17,12 @@ def remove_file(filepath):
         pass
 
 
-def execute(*args, supress_exception=False, cwd=None):
+@async_run
+async def execute(*args, cwd=None):
     cur_dir = os.getcwd()
 
-    try:
-        if cwd:
-            os.chdir(cwd)
-
-        proc = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
-        out, err = proc.communicate()
-        out = out.decode("utf-8")
-        err = err.decode("utf-8")
-        print(err)
-        if err and not supress_exception:
-            raise Exception(err)
-        else:
-            return out
-    finally:
-        os.chdir(cur_dir)
+    proc = await aioprocess(*args, cwd=cwd)
+    await proc.wait()
 
 
 def init_git():
@@ -51,22 +42,70 @@ def init_git():
             "config",
             "user.name",
             "{{ cookiecutter.full_name }}",
-            cwd=PROJECT_DIRECTORY
+            cwd=PROJECT_DIRECTORY,
         )
         execute(
             "git",
             "config",
             "user.email",
             "{{ cookiecutter.email }}",
-            cwd=PROJECT_DIRECTORY
+            cwd=PROJECT_DIRECTORY,
         )
 
-def install_pre_commit_hooks():
-    execute(sys.executable, "-m", "pip", "install", "pre-commit")
-    execute("pre-commit", "install")
+
+def init_dev():
+    print(Style.NORMAL, Fore.BLUE, "installing pre-commit hooks...")
+    print(Style.RESET_ALL, Style.DIM)
+    try:
+        execute(sys.executable, "-m", "pip", "install", "pre-commit")
+        execute("pre-commit", "install")
+        print(Style.NORMAL, Fore.GREEN, "pre-commit hooks was successfully installed")
+        print(Style.RESET_ALL)
+    except Exception as e:
+        print(e)
+        print(
+            Fore.YELLOW,
+            "failed to install pre-commit hooks. You may need run `pre-commit install` later by your self",
+            Style.RESET_ALL,
+        )
+
+    print(Style.NORMAL, Fore.BLUE, "installing poetry...")
+    print(Style.RESET_ALL, Style.DIM)
+
+    try:
+        execute(sys.executable, "-m", "pip", "install", "poetry")
+        print(Style.NORMAL, Fore.GREEN, "poetry installed successfully", Style.RESET_ALL)
+    except Exception as e:
+        print(e)
+        print(
+            Fore.YELLOW,
+            "failed to install poetry, you may need re-run the task by yourself.",
+            Style.RESET_ALL,
+        )
+        return
+
+    try:
+        print(Style.NORMAL, Fore.BLUE, "install all dev dependency packages...")
+        print(Style.RESET_ALL, Style.DIM)
+        execute("poetry", "install", "-E", "dev", "-E", "doc", "-E", "test")
+        print(
+            Style.NORMAL,
+            Fore.GREEN,
+            "all dev dependency packages installed successfully",
+            Style.RESET_ALL,
+        )
+    except Exception as e:
+        print(e)
+        print(
+            Style.NORMAL,
+            Fore.YELLOW,
+            "failed to install dev dependency packages, you may need re-run the task by yourself: poetry install -E dev -E test -E doc",
+            Style.RESET_ALL,
+        )
 
 
 if __name__ == "__main__":
+    colorama.init()
 
     if "{{ cookiecutter.create_author_file }}" != "y":
         remove_file("AUTHORS.md")
@@ -84,12 +123,8 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
 
-    if "{{ cookiecutter.install_precommit_hooks }}" == "y":
+    if "{{ cookiecutter.init_dev_env }}" == "y":
         try:
-            print("Installing pre-commit hooks...", os.getcwd())
-            install_pre_commit_hooks()
+            init_dev()
         except Exception as e:
-            print(str(e))
-            print(
-                "Failed to install pre-commit hooks. Please run `pre-commit install` by your self. For more on pre-commit, please refer to https://pre-commit.com"
-            )
+            print(e)
