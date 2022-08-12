@@ -22,7 +22,7 @@ jobs:
 
     strategy:
       matrix:
-        python-versions: [3.9]
+        python-versions: ['3.9']
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -43,8 +43,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox-gh-actions poetry
-          echo "package_version_short=`poetry version --short`" > $GITHUB_ENV
-          echo "package_version_full=`poetry version`" >> $GITHUB_ENV
+
+      # declare env.package_version_full, env.package_version_short, env.repo_owner, env.repo_name, so you may use it in web hooks.
+      # You may find usage in Dingtalk robot notification step
+      - name: Declare variables for convenient use
+        run: |
+          echo "package_version_short=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_version_full=`poetry version`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
+          echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
       - name: pre-publish documentation
         run: |
@@ -71,8 +78,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
           body: ${{ steps.build_changelog.outputs.changelog }}
           draft: false
           prerelease: false
@@ -83,3 +90,20 @@ jobs:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
           skip_existing: true
+
+      - name: Dingtalk Robot Notify
+        uses: leafney/dingtalk-action@v1.0.0
+        env: 
+          DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+        with:
+          msgtype: markdown
+          notify_when: 'success'
+          title: CI Notification | Success
+          text: |
+            ### Build success
+            ${{ env.package_version_full }} is built and published to test pypi
+            ### Change History
+            Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
+            ### package download
+            Please download the pacakge at: https://pypi.org/project/${{ env.repo_name }}/
