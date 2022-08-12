@@ -88,8 +88,8 @@ jobs:
           poetry run mkdocs build
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com
-          poetry run mike deploy "`poetry version --short`.dev"
-          poetry run mike set-default "`poetry version --short`.dev"
+          poetry run mike deploy -p -f "`poetry version --short`.dev"
+          poetry run mike set-default -p "`poetry version --short`.dev"
 
       - name: publish documentation
         uses: peaceiris/actions-gh-pages@v3
@@ -100,7 +100,6 @@ jobs:
       - name: Build wheels and source tarball
         run: |
           poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
-          poetry version --short
           poetry build
 
       - name: publish to Test PyPI
