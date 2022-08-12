@@ -107,9 +107,9 @@ jobs:
           notify_when: 'success'
           title: CI Notification | Success
           text: |
-            ### Build success
+            ### Build Success
             ${{ env.package_version_full }} is built and published to test pypi
             ### Change History
             Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
-            ### package download
+            ### Package Download
             Please download the pacakge at: https://test.pypi.org/project/${{ env.repo_name }}/
