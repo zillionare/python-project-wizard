@@ -21,7 +21,7 @@ jobs:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        python-versions: ['3.7,' '3.8',' 3.9', '3.10']
+        python-versions: ['3.7', '3.8',' 3.9', '3.10']
         # github action doesn't goes well with windows due to docker support
         # github action doesn't goes well with macos due to `no docker command`
         #os: [ubuntu-20.04, windows-latest, macos-latest]
