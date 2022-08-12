@@ -1,4 +1,3 @@
-# Tutorial
 
 ??? Note
     Did you find this article confusing? [Edit this file] and pull a request!
@@ -240,13 +239,89 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 ???+ Info
     Though we used mkdocs here, however, in order to support multiple versions of documentation, we actually use mike in github actions.
 
+???+ Important
+    ppw choose github pages to host your documentation. you need visit https://github.com/{github_account}/{your_repo}/settings/pages to enable it:
+
+    ![](https://images.jieyu.ai/images/20220820220812134811.png)
+
+    the above pages shows example on how to configure it.
+
 ## Step 11. Make an official release
 
-  After done with your phased development, switch to either of (main, master) branch, following
-  instructions at [release checklist](/python-project-wizard/pypi_release_checklist), trigger first official release and check
-  result at [PYPI].
+    After done with your phased development, switch to either of (main, master) branch, following instructions at [release checklist](/python-project-wizard/pypi_release_checklist), trigger first official release and check result at [PYPI].
   
+## Step 12. Customization
 
+ppw assume some settings for you, for example, it choose python version in pyproject.toml and tox.ini. You may need change the according to you case.
+
+The following section will address how to customize github workflow:
+### customize github workflow
+
+    You may need to customize settings in workflow. Open .github/workflows/dev.yml:
+    ```
+    jobs:
+    test:
+        # The type of runner that the job will run on
+        strategy:
+        matrix:
+            python-versions: ['3.7,' '3.8',' 3.9', '3.10']
+            # github action doesn't goes well with windows due to docker support
+            # github action doesn't goes well with macos due to `no docker command`
+            #os: [ubuntu-20.04, windows-latest, macos-latest]
+            os: [ubuntu-20.04]
+        runs-on: ${{ matrix.os }}
+    ```
+    you may need to change python-version and os here. If you need to change python version, make sure never use 3.10 (rather than '3.10'). The former one will is actually equal to 3.1, according to yaml's parser.
+
+    We need run build & publish job on one platform & python version only. So ppw have seperate test job from "build & publish" job, and you have to change `runs-on` and `python-version` accordingly too.
+
+    ```
+    publish_dev_build:
+        # if test failed, we should not publish
+        needs: test
+        # you may need to change os below
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - uses: actions/setup-python@v2
+            with:
+            # you may need to change python version below
+            python-version: '3.9'
+    ```
+
+    ppw also provide example configuration about how to use service and webhooks (Dingtalk notification robot), but it's disabled by default. Uncomment these lines to enable it:
+    ```
+    # uncomment the following to pickup services
+    # services:
+    #   redis:
+    #     image: redis
+    #     options: >-
+    #       --health-cmd "redis-cli ping"
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+    #     ports:
+    #       - 6379:6379
+    ```
+
+    ```
+    # - name: Dingtalk Robot Notify
+    #   uses: leafney/dingtalk-action@v1.0.0
+    #   env: 
+    #     DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
+    #     DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+    #   with:
+    #     msgtype: markdown
+    #     notify_when: 'success'
+    #     title: CI Notification | Success
+    #     text: |
+    #       ### Build success
+    #       ${{ env.package_version_full }} is built and published to test pypi
+    #       ### Change History
+    #       Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
+    #       ### package download
+    #       Please download the pacakge at: https://test.pypi.org/project/${{ env.repo_name }}/
+    ```
 
 [Edit this file]: https://github.com/zillionare/cookiecutter-pypackage/blob/master/docs/tutorial.md
 [Codecov]: https://codecov.io/

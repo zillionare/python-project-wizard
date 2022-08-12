@@ -2,6 +2,8 @@
 !!! Info
     `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
 
+## v1.2.1
+* [#21](https://github.com/zillionare/python-project-wizard/issues/21) add environment variable: repo_name and repon_owner
 ## v1.2
 * [#7](https://github.com/zillionare/python-project-wizard/issues/7) documentatioin will now support multiple versions
 * [#8](https://github.com/zillionare/python-project-wizard/issues/8) add .docstring.tpl to project
