@@ -48,6 +48,7 @@ At last step, it'll ask you `ppw` should performe initialization for you. If the
 1. install pre-commit hooks
 2. install poetry
 3. install necessary dependencies which required by test and documentation. These deps will include pytest, tox, mkdocs and etc.
+4. lint your files has just been generated.
 
 The project layout should look like:
 
@@ -149,6 +150,29 @@ This will give you a test report and a lint report. You should see no errors exc
 
 ## Step 6: Create a GitHub Repo
 
+???+Info
+    Going through step 6 and 7 is tedious. So that's why we provide a bash script --repo.sh, to help creating repo, setting secrets and publishing your code to the repo automatically.
+
+    The script looks like the following:
+    ```
+    # Uncomment the following to config github secret used by github workflow. 
+    # gh secret set PERSONAL_TOKEN --body $GH_TOKEN
+    # gh secret set PYPI_API_TOKEN --body $PYPI_API_TOKEN
+    # gh secret set TEST_PYPI_API_TOKEN --body $TEST_PYPI_API_TOKEN
+
+    # uncomment the following if you need to setup email notification
+    # gh secret set BUILD_NOTIFY_MAIL_SERVER --body $BUILD_NOTIFY_MAIL_SERVER
+    # gh secret set BUILD_NOTIFY_MAIL_FROM --body $BUILD_NOTIFY_MAIL_FROM
+    # gh secret set BUILD_NOTIFY_MAIL_PASSWORD --body $BUILD_NOTIFY_MAIL_PASSWORD
+    # gh secret set BUILD_NOTIFY_MAIL_RCPT --body $BUILD_NOTIFY_MAIL_RCPT
+
+    # uncomment the following to create repo and push code to github
+    # git add ./{{cookiecutter.project_slug}}
+    # git commit -m "Initial commit by ppw"
+    # gh repo create your_repo --public -s ./path/to/source --push
+    ```
+    before launch the script, you will need to apply github personal token and set environment variable GH_TOKEN beforehand. And you need install the tool [**gh**](https://cli.github.com/) too.
+
 Go to your GitHub account and create a new repo named `mypackage`, where
 `mypackage` matches the `[project_slug]` from your answers when running `ppw`
 
@@ -159,21 +183,7 @@ Then goto repo > settings > secrets, click on 'New repository secret', add the f
 - PYPI_API_TOKEN, see [How to apply pypi token]
 - PERSONAL_TOKEN, see [How to apply personal token]
 
-## Step 7: Setup codecov integration
-
-???+ Tips
-
-    If you have already setup codecov integration and configured access for all your
-    repositories, you can skip this step.
-
-In your browser, visit [install codecov app], you'll be landed at this page:
-
-![](http://images.jieyu.ai/images/202104/20210419175222.png)
-
-Click on the green `install` button at top right, choose `all repositories` then click
-on `install` button, following directions until all sets.
-
-## Step 8: Upload code to github
+## Step 7: Upload code to github
 
 Back to your develop environment, find the folder named after the `[project_slug]`.
 Go to this folder, and then setup git to use your GitHub repo and upload the
@@ -200,6 +210,20 @@ You'll need a ssh key to push the repo. You could [Generate] a key or
     if you answered 'yes' to the question if `init_dev_env` at last step,
     then you should find `pre-commit` was invoked when you run `git commit`, and some files
      may be modified by hooks. If so, please add these files and **commit again**.
+
+## Step 8: Setup codecov integration
+
+???+ Tips
+
+    If you have already setup codecov integration and configured access for all your
+    repositories, you can skip this step.
+
+In your browser, visit [install codecov app], you'll be landed at this page:
+
+![](http://images.jieyu.ai/images/202104/20210419175222.png)
+
+Click on the green `install` button at top right, choose `all repositories` then click
+on `install` button, following directions until all sets.
 
 ### Step 9: Check the CI result
 
@@ -252,11 +276,9 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
   
 ## Step 12. Customization
 
-ppw assume some settings for you, for example, it choose python version in pyproject.toml and tox.ini. You may need change the according to you case.
+ppw assumed some settings for you, for example, it choose python version in pyproject.toml and tox.ini. Change accordingly to match you case.
 
 The following section will address how to customize github workflow:
-### customize github workflow
-
     You may need to customize settings in workflow. Open .github/workflows/dev.yml:
     ```
     jobs:

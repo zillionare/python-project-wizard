@@ -73,14 +73,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry tox tox-gh-actions
 
-      # declare env.package_version_full, env.package_version_short, env.repo_owner, env.repo_name, so you may use it in web hooks.
-      # You may find usage in Dingtalk robot notification step
+      # declare env.package_version_full, env.package_version, env.repo_owner, env.repo_name, env.package_name so you may use it in web hooks.
       - name: Declare variables for convenient use
         run: |
-          echo "package_version_short=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-          echo "package_version_full=`poetry version`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_version=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_name=`poetry version | awk '{print $1}'`" >> $GITHUB_ENV
           echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
           echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+        shell: bash
 
       - name: build documentation
         run: |
@@ -109,6 +109,18 @@ jobs:
           password: ${{ secrets.TEST_PYPI_API_TOKEN}}
           repository_url: https://test.pypi.org/legacy/
           skip_existing: true
+
+      - name: build notification via email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.BUILD_NOTIFY_MAIL_SERVER }}
+          username: ${{ secrets.BUILD_NOTIFY_MAIL_FROM }}
+          password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
+          to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
+          subject: ${{ env.package_name }}.${{ env.package_version}} build success
+          body: |
+            Change History:  https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
+            Package Download: https://pypi.org/project/${{ env.package_name }}/
 
       # - name: Dingtalk Robot Notify
       #   uses: leafney/dingtalk-action@v1.0.0

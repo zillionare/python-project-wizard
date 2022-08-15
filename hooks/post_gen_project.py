@@ -103,6 +103,26 @@ def init_dev():
             Style.RESET_ALL,
         )
 
+    try:
+        print(Style.NORMAL, Fore.BLUE, "lint files...")
+        print(Style.RESET_ALL, Style.DIM)
+        execute("pre-commit", "run", "--all")
+        print(
+            Style.NORMAL,
+            Fore.GREEN,
+            "lint files successfully",
+            Style.RESET_ALL
+        )
+    except Exception as e:
+        print(e)
+        print(
+            Style.NORMAL,
+            Fore.YELLOW,
+            "error occurs when run command `pre-commit run --all`."
+            Style.RESET_ALL
+        )
+
+
 
 if __name__ == "__main__":
     colorama.init()

@@ -60,12 +60,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry tox tox-gh-actions
 
-      # declare env.package_version_full, env.package_version_short, env.repo_owner, env.repo_name, so you may use it in web hooks.
-      # You may find usage in Dingtalk robot notification step
+      # declare env.package_version_full, env.package_name, env.package_version, env.repo_owner, env.repo_name, so you may use it in web hooks.
       - name: Declare variables for convenient use
         run: |
-          echo "package_version_short=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-          echo "package_version_full=`poetry version`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_version=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_name=`poetry version`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
           echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
           echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
@@ -108,8 +107,8 @@ jobs:
           title: CI Notification | Success
           text: |
             ### Build Success
-            ${{ env.package_version_full }} is built and published to test pypi
+            ${{ env.package_name }}.${{ env.package_version }} is built and published to test pypi
             ### Change History
             Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
             ### Package Download
-            Please download the pacakge at: https://test.pypi.org/project/${{ env.repo_name }}/
+            Please download the pacakge at: https://test.pypi.org/project/${{ env.package_name }}/

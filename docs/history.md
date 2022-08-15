@@ -2,6 +2,9 @@
 !!! Info
     `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
 
+## v1.3
+* [#23](https://github.com/zillionare/python-project-wizard/issues/23)
+* [#24](https://github.com/zillionare/python-project-wizard/issues/24)
 ## v1.2.2
 * [#22](https://github.com/zillionare/python-project-wizard/issues/22) mike deploy failed
 ## v1.2.1
