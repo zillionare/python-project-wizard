@@ -118,7 +118,7 @@ def init_dev():
         print(
             Style.NORMAL,
             Fore.YELLOW,
-            "error occurs when run command `pre-commit run --all`."
+            "error occurs when run command `pre-commit run --all`.",
             Style.RESET_ALL
         )
 
