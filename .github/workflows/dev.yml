@@ -64,7 +64,7 @@ jobs:
       - name: Declare variables for convenient use
         run: |
           echo "package_version=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-          echo "package_name=`poetry version`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "package_name=`poetry version |awk '{print $1'}`" >> $GITHUB_ENV
           echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
           echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
@@ -108,7 +108,9 @@ jobs:
           text: |
             ### Build Success
             ${{ env.package_name }}.${{ env.package_version }} is built and published to test pypi
-            ### Change History
-            Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
+            ### Change Details
+            ${{ github.event.head_commit.message }}
+
+            For more information, please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
             ### Package Download
             Please download the pacakge at: https://test.pypi.org/project/${{ env.package_name }}/
