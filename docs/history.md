@@ -3,8 +3,9 @@
     `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
 
 ## v1.3
-* [#23](https://github.com/zillionare/python-project-wizard/issues/23)
-* [#24](https://github.com/zillionare/python-project-wizard/issues/24)
+* [#23](https://github.com/zillionare/python-project-wizard/issues/23) add email notification upon build success
+* [#24](https://github.com/zillionare/python-project-wizard/issues/24) config repo secrets by script
+* [#25](https://github.com/zillionare/python-project-wizard/issues/25) support create repo and upload source code
 ## v1.2.2
 * [#22](https://github.com/zillionare/python-project-wizard/issues/22) mike deploy failed
 ## v1.2.1

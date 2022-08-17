@@ -1,7 +1,13 @@
 #!/bin/bash
 
+# !!!NOTICE!!
 # Personal token with full access rights is required to run this scripts
 # Once you got persona token, set enviroment variable GH_TOKEN with it
+
+# uncomment the following to create repo and push code to github
+# git add .
+# git commit -m "Initial commit by ppw"
+# gh repo create {{cookiecutter.project_slug}} --public -s . --push
 
 # Uncomment the following to config github secret used by github workflow. 
 # gh secret set PERSONAL_TOKEN --body $GH_TOKEN
@@ -13,8 +19,3 @@
 # gh secret set BUILD_NOTIFY_MAIL_FROM --body $BUILD_NOTIFY_MAIL_FROM
 # gh secret set BUILD_NOTIFY_MAIL_PASSWORD --body $BUILD_NOTIFY_MAIL_PASSWORD
 # gh secret set BUILD_NOTIFY_MAIL_RCPT --body $BUILD_NOTIFY_MAIL_RCPT
-
-# uncomment the following to create repo and push code to github
-# git add ./{{cookiecutter.project_slug}}
-# git commit -m "Initial commit by ppw"
-# gh repo create {{cookiecutter.project_slug}} --public -s ./{{cookiecutter.project_slug}} --push

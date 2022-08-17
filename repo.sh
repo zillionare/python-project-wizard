@@ -13,8 +13,8 @@ gh secret set BUILD_NOTIFY_MAIL_SERVER --body $BUILD_NOTIFY_MAIL_SERVER
 gh secret set BUILD_NOTIFY_MAIL_FROM --body $BUILD_NOTIFY_MAIL_FROM
 gh secret set BUILD_NOTIFY_MAIL_PASSWORD --body $BUILD_NOTIFY_MAIL_PASSWORD
 gh secret set BUILD_NOTIFY_MAIL_RCPT --body $BUILD_NOTIFY_MAIL_RCPT
-gh secret set DINGTALK_ACCESS_TOKEN --body $DINGTALK_ACCESS_TOKEN
-gh secret set DINGTALK_SECRET --body $DINGTALK_SECRET
+gh secret set DINGTALK_ACCESS_TOKEN --body $BUILD_DINGTALK_ACCESS_TOKEN
+gh secret set DINGTALK_SECRET --body $BUILD_DINGTALK_SECRET
 
 # uncomment the following to create repo and push code to github
 # git add ./{{cookiecutter.project_slug}}

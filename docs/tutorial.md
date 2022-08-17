@@ -155,6 +155,11 @@ This will give you a test report and a lint report. You should see no errors exc
 
     The script looks like the following:
     ```
+    # uncomment the following to create repo and push code to github
+    # git add .
+    # git commit -m "Initial commit by ppw"
+    # gh repo create {{cookiecutter.project_slug}} --public -s . --push
+
     # Uncomment the following to config github secret used by github workflow. 
     # gh secret set PERSONAL_TOKEN --body $GH_TOKEN
     # gh secret set PYPI_API_TOKEN --body $PYPI_API_TOKEN
@@ -165,11 +170,6 @@ This will give you a test report and a lint report. You should see no errors exc
     # gh secret set BUILD_NOTIFY_MAIL_FROM --body $BUILD_NOTIFY_MAIL_FROM
     # gh secret set BUILD_NOTIFY_MAIL_PASSWORD --body $BUILD_NOTIFY_MAIL_PASSWORD
     # gh secret set BUILD_NOTIFY_MAIL_RCPT --body $BUILD_NOTIFY_MAIL_RCPT
-
-    # uncomment the following to create repo and push code to github
-    # git add ./{{cookiecutter.project_slug}}
-    # git commit -m "Initial commit by ppw"
-    # gh repo create your_repo --public -s ./path/to/source --push
     ```
     before launch the script, you will need to apply github personal token and set environment variable GH_TOKEN beforehand. And you need install the tool [**gh**](https://cli.github.com/) too.
 
@@ -225,7 +225,7 @@ In your browser, visit [install codecov app], you'll be landed at this page:
 Click on the green `install` button at top right, choose `all repositories` then click
 on `install` button, following directions until all sets.
 
-### Step 9: Check the CI result
+## Step 9: Check the CI result
 
 After pushing your code to github, go to github web page, navigate to your repo, then
 click on actions link, you should find screen like this:
@@ -237,28 +237,25 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 
 ## Step 10. Check the documentation
 
-  Documentation will be published and available at
-  <https://{your_github_account}.github.io/{your_repo}> once:
+Documentation will be published and available at <https://{your_github_account}.github.io/{your_repo}> once:
 
     1. the branch is either main or master
     2. the commit is tagged, and the tag name is started with 'v' (lower case)
     3. build/testing executed by github CI passed
 
-  If you'd like to see what it looks like now, you could run the followng command:
+If you'd like to see what it looks like now, you could run the followng command:
 
   ```
   mkdocs gh-deploy
   ```
 
-  then check your documentation at <https://{your_github_account}.github.io/{your_repo}>
-
-  or you can serve it locally by:
+then check your documentation at <https://{your_github_account}.github.io/{your_repo}> or you can serve it locally by:
 
   ```
   mkdocs serve -a 0.0.0.0:8000
   ```
   
-  then open your browser, visit your dev machine on port 8000.
+then open your browser, visit your dev machine on port 8000.
 
 ???+ Info
     Though we used mkdocs here, however, in order to support multiple versions of documentation, we actually use mike in github actions.
@@ -272,7 +269,7 @@ new artifact is published under the name {{ cookiecutter.project_slug }}
 
 ## Step 11. Make an official release
 
-    After done with your phased development, switch to either of (main, master) branch, following instructions at [release checklist](/python-project-wizard/pypi_release_checklist), trigger first official release and check result at [PYPI].
+After done with your phased development, switch to either of (main, master) branch, following instructions at [release checklist](/pypi_release_checklist), trigger first official release and check result at [PYPI].
   
 ## Step 12. Customization
 

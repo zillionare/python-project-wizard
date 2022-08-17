@@ -58,7 +58,7 @@ def init_dev():
     print(Style.RESET_ALL, Style.DIM)
     try:
         execute(sys.executable, "-m", "pip", "install", "pre-commit")
-        execute("pre-commit", "install")
+        execute("pre-commit", "install", cwd=PROJECT_DIRECTORY)
         print(Style.NORMAL, Fore.GREEN, "pre-commit hooks was successfully installed")
         print(Style.RESET_ALL)
     except Exception as e:
@@ -87,7 +87,7 @@ def init_dev():
     try:
         print(Style.NORMAL, Fore.BLUE, "install all dev dependency packages...")
         print(Style.RESET_ALL, Style.DIM)
-        execute("poetry", "install", "-E", "dev", "-E", "doc", "-E", "test")
+        execute("poetry", "install", "-E", "dev", "-E", "doc", "-E", "test", cwd=PROJECT_DIRECTORY)
         print(
             Style.NORMAL,
             Fore.GREEN,
@@ -106,7 +106,7 @@ def init_dev():
     try:
         print(Style.NORMAL, Fore.BLUE, "lint files...")
         print(Style.RESET_ALL, Style.DIM)
-        execute("pre-commit", "run", "--all")
+        execute("pre-commit", "run", "--all", cwd=PROJECT_DIRECTORY)
         print(
             Style.NORMAL,
             Fore.GREEN,
