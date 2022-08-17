@@ -6,6 +6,8 @@
 
 # uncomment the following to create repo and push code to github
 # git add .
+# pre-commit run --all-files
+# git add .
 # git commit -m "Initial commit by ppw"
 # gh repo create {{cookiecutter.project_slug}} --public -s . --push
 

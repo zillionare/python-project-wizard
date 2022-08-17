@@ -148,7 +148,7 @@ This will give you a test report and a lint report. You should see no errors exc
     machine. Otherwise, remove it from tox.ini and pyproject.toml (search python3.x then
     remove it).
 
-## Step 6: Create a GitHub Repo
+## Step 6: Create GitHub Repo
 
 ???+Info
     Going through step 6 and 7 is tedious. So that's why we provide a bash script --repo.sh, to help creating repo, setting secrets and publishing your code to the repo automatically.

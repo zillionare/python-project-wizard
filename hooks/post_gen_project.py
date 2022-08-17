@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import os
-import subprocess
 import sys
-import asyncio
 from hooks.aioproc import aioprocess, async_run
 import colorama
 from colorama import Fore, Style
@@ -58,7 +56,7 @@ def init_dev():
     print(Style.RESET_ALL, Style.DIM)
     try:
         execute(sys.executable, "-m", "pip", "install", "pre-commit")
-        execute("pre-commit", "install", cwd=PROJECT_DIRECTORY)
+        execute("pre-commit", "install", cwd="{{ cookiecutter.project_slug }}")
         print(Style.NORMAL, Fore.GREEN, "pre-commit hooks was successfully installed")
         print(Style.RESET_ALL)
     except Exception as e:
@@ -101,25 +99,6 @@ def init_dev():
             Fore.YELLOW,
             "failed to install dev dependency packages, you may need re-run the task by yourself: poetry install -E dev -E test -E doc",
             Style.RESET_ALL,
-        )
-
-    try:
-        print(Style.NORMAL, Fore.BLUE, "lint files...")
-        print(Style.RESET_ALL, Style.DIM)
-        execute("pre-commit", "run", "--all", cwd=PROJECT_DIRECTORY)
-        print(
-            Style.NORMAL,
-            Fore.GREEN,
-            "lint files successfully",
-            Style.RESET_ALL
-        )
-    except Exception as e:
-        print(e)
-        print(
-            Style.NORMAL,
-            Fore.YELLOW,
-            "error occurs when run command `pre-commit run --all`.",
-            Style.RESET_ALL
         )
 
 

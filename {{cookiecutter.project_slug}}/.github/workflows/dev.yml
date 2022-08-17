@@ -73,7 +73,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry tox tox-gh-actions
 
-      # declare env.package_version_full, env.package_version, env.repo_owner, env.repo_name, env.package_name so you may use it in web hooks.
+      # declare env.package_version, env.package_version, env.repo_owner, env.repo_name, env.package_name so you may use it in web hooks.
       - name: Declare variables for convenient use
         run: |
           echo "package_version=`poetry version --short`.DEV.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
