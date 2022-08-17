@@ -95,7 +95,7 @@ jobs:
           title: CI Notification | Success
           text: |
             ### Build Success
-            ${{ env.package_name }}.${{ env.package_version }} is built and published to test pypi
+            ${{ env.package_name }}.${{ env.package_version }} is built and published to pypi
             ### Change History
             Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
             ### Package Download
