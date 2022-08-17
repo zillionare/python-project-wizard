@@ -77,7 +77,7 @@ jobs:
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com
           echo "run mike deploy"
-          poetry run mike deploy -p -f "`poetry version --short`.dev"
+          poetry run mike deploy -p -f --ignore "`poetry version --short`.dev"
           poetry run mike set-default -p "`poetry version --short`.dev"
 
       - name: publish documentation
