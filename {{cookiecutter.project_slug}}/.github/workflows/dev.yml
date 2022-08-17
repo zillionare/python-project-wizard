@@ -112,6 +112,7 @@ jobs:
           server_port: ${{ secrets.BUILD_NOTIFY_MAIL_PORT }}
           username: ${{ secrets.BUILD_NOTIFY_MAIL_FROM }}
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
+          from: build-bot
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
           subject: ${{ env.package_name }}.${{ env.package_version}} build success
           body: |

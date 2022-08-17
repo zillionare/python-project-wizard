@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "ppw"
-version = "1.3.0"
+version = "1.3.1"
 description = "A Wizard to create a skeleton python project with up-to-date technology"
 license = "BSD-3-Clause"
 authors = ["Aaron Yang <aaron_yang@jieyu.ai>"]
