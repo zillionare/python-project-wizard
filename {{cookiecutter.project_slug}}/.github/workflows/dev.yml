@@ -91,12 +91,6 @@ jobs:
           poetry run mike deploy -p -f --ignore "`poetry version --short`.dev"
           poetry run mike set-default -p "`poetry version --short`.dev"
 
-      - name: publish documentation
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./site
-
       - name: Build wheels and source tarball
         run: |
           poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
@@ -111,9 +105,11 @@ jobs:
           skip_existing: true
 
       - name: build notification via email
+        if: always()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.BUILD_NOTIFY_MAIL_SERVER }}
+          server_port: ${{ secrets.BUILD_NOTIFY_MAIL_PORT }}
           username: ${{ secrets.BUILD_NOTIFY_MAIL_FROM }}
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
@@ -123,13 +119,13 @@ jobs:
             Package Download: https://pypi.org/project/${{ env.package_name }}/
 
       # - name: Dingtalk Robot Notify
+      #   if: always()
       #   uses: leafney/dingtalk-action@v1.0.0
       #   env: 
       #     DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
       #     DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
       #   with:
       #     msgtype: markdown
-      #     notify_when: 'success'
       #     title: CI Notification | Success
       #     text: |
       #       ### Build Success

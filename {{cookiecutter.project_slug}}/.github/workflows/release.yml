@@ -44,7 +44,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox-gh-actions poetry
           
-      # declare env.package_version_full, env.package_version, env.package_name, env.repo_owner, env.repo_name, so you may use it in web hooks.
+      # declare env.package_version, env.package_version, env.package_name, env.repo_owner, env.repo_name, so you may use it in web hooks.
       - name: Declare variables for convenient use
         run: |
           echo "package_version=`poetry version --short`" >> $GITHUB_ENV
@@ -53,7 +53,7 @@ jobs:
           echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
         shell: bash
 
-      - name: pre-publish documentation
+      - name: publish documentation
         run: |
           poetry install -E doc
           poetry run mkdocs build
@@ -61,12 +61,6 @@ jobs:
           git config --global user.email docs@dummy.bot.com
           poetry run mike deploy -p -f --ignore `poetry version --short`
           poetry run mike set-default -p `poetry version --short`
-
-      - name: publish documentation
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./site
 
       - name: Build wheels and source tarball
         run: >-
@@ -92,9 +86,11 @@ jobs:
           skip_existing: true
 
       - name: build notification
+        if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: ${{ secrets.MAIL_SERVER }}
+          server_address: ${{ secrets.BUILD_NOTIFY_MAIL_SERVER }}
+          server_port: ${{ secrets.BUILD_NOTIFY_MAIL_PORT }}
           username: ${{ secrets.BUILD_NOTIFY_MAIL_FROM }}
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
@@ -105,13 +101,13 @@ jobs:
 
           
       # - name: Dingtalk Robot Notify
+      #   if: always()
       #   uses: leafney/dingtalk-action@v1.0.0
       #   env: 
       #     DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
       #     DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
       #   with:
       #     msgtype: markdown
-      #     notify_when: 'success'
       #     title: CI Notification | Success
       #     text: |
       #       ### Build Success

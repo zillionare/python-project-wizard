@@ -48,11 +48,11 @@ jobs:
       - name: Declare variables for convenient use
         run: |
           echo "package_version=`poetry version --short`" >> $GITHUB_ENV
-          echo "package_name=`poetry version | awk {'print $1'}`" >> $GITHUB_ENV
+          echo "package_name=`poetry version | awk '{print $1}'`" >> $GITHUB_ENV
           echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
           echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
 
-      - name: pre-publish documentation
+      - name: publish documentation
         run: |
           poetry install -E dev
           poetry run mkdocs build
@@ -60,12 +60,6 @@ jobs:
           git config --global user.email docs@dummy.bot.com
           poetry run mike deploy -p -f --ignore `poetry version --short`
           poetry run mike set-default -p `poetry version --short`
-
-      - name: publish documentation
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_dir: ./site
 
       - name: Build wheels and source tarball
         run: >-
@@ -91,13 +85,13 @@ jobs:
           skip_existing: true
 
       - name: Dingtalk Robot Notify
+        if: always()
         uses: leafney/dingtalk-action@v1.0.0
         env: 
           DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
           DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
         with:
           msgtype: markdown
-          notify_when: 'success'
           title: CI Notification | Success
           text: |
             ### Build Success
