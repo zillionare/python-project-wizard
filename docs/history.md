@@ -2,6 +2,9 @@
 !!! Info
     `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
 
+## v1.3.2
+*[#28](https://github.com/zillionare/python-project-wizard/issues/28) Send notification mail whenever build success or failed
+*[#27](https://github.com/zillionare/python-project-wizard/issues/27) failed to send build notfication mail due to no from field
 ## v1.3.1
 *[#26](https://github.com/zillionare/python-project-wizard/issues/26) use mike to deploy multiple version of documentation directly, removed github action peaceiris/actions-gh-pages@v3 
 ## v1.3

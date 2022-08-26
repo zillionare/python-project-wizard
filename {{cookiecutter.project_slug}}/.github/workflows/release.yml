@@ -15,14 +15,19 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   release:
-    name: Create Release
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
         python-versions: ['3.9']
+
+    # map step outputs to job outputs so they can be share among jobs
+    outputs:
+      package_version: ${{ steps.variables_step.outputs.package_version }}
+      package_name: ${{ steps.variables_step.outputs.package_name }}
+      repo_name: ${{ steps.variables_step.outputs.repo_name }}
+      repo_owner: ${{ steps.variables_step.outputs.repo_owner }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -43,14 +48,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install tox-gh-actions poetry
-          
-      # declare env.package_version, env.package_version, env.package_name, env.repo_owner, env.repo_name, so you may use it in web hooks.
+
+        # declare package_version, package_version, repo_owner, repo_name, package_name so you may use it in web hooks.
       - name: Declare variables for convenient use
+        id: variables_step
         run: |
-          echo "package_version=`poetry version --short`" >> $GITHUB_ENV
-          echo "package_name=`poetry version | awk '{print $1}'`" >> $GITHUB_ENV
-          echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_ENV
-          echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "::set-output name=repo_owner::${GITHUB_REPOSITORY%/*}"
+          echo "::set-output name=repo_name::${GITHUB_REPOSITORY#*/}"
+          echo "::set-output name=package_name::`poetry version | awk '{print $1}'`"
+          echo "::set-output name=package_version::`poetry version --short`"
         shell: bash
 
       - name: publish documentation
@@ -63,7 +69,8 @@ jobs:
           poetry run mike set-default -p `poetry version --short`
 
       - name: Build wheels and source tarball
-        run: >-
+        run: |
+          poetry lock
           poetry build
 
       - name: Create Release
@@ -72,8 +79,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
           body: ${{ steps.build_changelog.outputs.changelog }}
           draft: false
           prerelease: false
@@ -85,8 +92,16 @@ jobs:
           password: ${{ secrets.PYPI_API_TOKEN }}
           skip_existing: true
 
-      - name: build notification
-        if: always()
+  notification:
+    needs: release
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: martialonline/workflow-status@v2
+        id: check
+
+      - name: build success notification via email
+        if: ${{ steps.check.outputs.status == 'success' }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.BUILD_NOTIFY_MAIL_SERVER }}
@@ -95,16 +110,47 @@ jobs:
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           from: build-bot
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
-          subject: ${{ env.package_name }}.${{ env.package_version}} build success
-          body: |
-            Change History:  https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
-            Package Download: https://pypi.org/project/${{ env.package_name }}/
+          subject: ${{ needs.release.outputs.package_name }}.${{ needs.release.outputs.package_version}} build successfully
+          convert_markdown: true
+          html_body: |
+            ## Build Success
+            ${{ needs.release.outputs.package_name }}.${{ needs.release.outputs.package_version }} is built and published to PYPI
 
-          
+            ## Change Details
+            ${{ github.event.head_commit.message }}
+
+            For more information, please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/history
+
+            ## Package Download
+            The pacakge is available at: https://pypi.org/project/${{ needs.release.outputs.package_name }}/
+
+      - name: build failure notification via email
+        if: ${{ steps.check.outputs.status == 'failure' }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.BUILD_NOTIFY_MAIL_SERVER }}
+          server_port: ${{ secrets.BUILD_NOTIFY_MAIL_PORT }}
+          username: ${{ secrets.BUILD_NOTIFY_MAIL_FROM }}
+          password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
+          from: build-bot
+          to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
+          subject: ${{ needs.release.outputs.package_name }}.${{ needs.release.outputs.package_version}} build failure
+          convert_markdown: true
+          html_body: |
+            ## Change Details
+            ${{ github.event.head_commit.message }}
+
+            ## Status: ${{ steps.check.outputs.status }}
+
+
+            ## View Log
+            https://github.com/${{ needs.release.outputs.repo_owner }}/${{ needs.release.outputs.repo_name }}/actions
+
+
       # - name: Dingtalk Robot Notify
       #   if: always()
       #   uses: leafney/dingtalk-action@v1.0.0
-      #   env: 
+      #   env:
       #     DINGTALK_ACCESS_TOKEN: ${{ secrets.DINGTALK_ACCESS_TOKEN }}
       #     DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
       #   with:
@@ -112,8 +158,8 @@ jobs:
       #     title: CI Notification | Success
       #     text: |
       #       ### Build Success
-      #       ${{ env.package_version_full }} is built and published to test pypi
+      #       ${{ needs.release.outputs.package_version_full }} is built and published to test pypi
       #       ### Change History
-      #       Please check change history at https://${{ env.repo_owner }}.github.io/${{ env.repo_name }}/history
+      #       Please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/history
       #       ### Package Download
-      #       Please download the pacakge at: https://pypi.org/project/${{ env.repo_name }}/
+      #       Please download the pacakge at: https://test.pypi.org/project/${{ needs.release.outputs.repo_name }}/
