@@ -119,7 +119,7 @@ jobs:
             ## Change Details
             ${{ github.event.head_commit.message }}
 
-            For more information, please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/history
+            For more information, please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/${{ needs.release.outputs.package_version }}/history
 
             ## Package Download
             The pacakge is available at: https://pypi.org/project/${{ needs.release.outputs.package_name }}/

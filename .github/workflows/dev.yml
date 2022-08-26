@@ -125,7 +125,7 @@ jobs:
             ## Change Details
             ${{ github.event.head_commit.message }}
 
-            For more information, please check change history at https://${{ needs.test.outputs.repo_owner }}.github.io/${{ needs.test.outputs.repo_name }}/history
+            For more information, please check change history at https://${{ needs.test.outputs.repo_owner }}.github.io/${{ needs.test.outputs.repo_name }}/${{ needs.test.output.package_version }}/history
 
             ## Package Download
             The pacakge is available at: https://test.pypi.org/project/${{ needs.test.outputs.package_name }}/
