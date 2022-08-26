@@ -4,14 +4,13 @@ name: dev build CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events
   push:
     branches:
       - '*'
   pull_request:
     branches:
       - '*'
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -60,7 +59,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions poetry
 
-      # declare env.package_version, env.package_version, env.repo_owner, env.repo_name, env.package_name so you may use it in web hooks.
+      # declare package_version, repo_owner, repo_name, package_name so you may use it in web hooks.
       - name: Declare variables for convenient use
         id: variables_step
         run: |
@@ -72,6 +71,10 @@ jobs:
 
       - name: test with tox
         run: tox
+
+      - uses: codecov/codecov-action@v3
+        with:
+          fail_ci_if_error: true
 
   publish_dev_build:
     # if test failed, we should not publish
