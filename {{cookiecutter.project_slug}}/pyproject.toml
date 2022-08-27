@@ -65,14 +65,20 @@ mike = { version="^1.1.2", optional=true}
 [tool.poetry.extras]
 test = [
     "pytest",
-    "black",
-    "isort",
-    "flake8",
-    "flake8-docstrings",
     "pytest-cov"
     ]
 
-dev = ["tox", "pre-commit", "virtualenv", "pip", "twine", "toml"]
+dev = ["tox", 
+    "pre-commit", 
+    "virtualenv", 
+    "pip", 
+    "twine", 
+    "toml", 
+    "black",
+    "isort",
+    "flake8",
+    "flake8-docstrings"
+    ]
 
 doc = [
     "mkdocs",
@@ -108,6 +114,7 @@ exclude = '''
   | buck-out
   | build
   | dist
+  | \.history
 )/
 '''
 [tool.isort]
