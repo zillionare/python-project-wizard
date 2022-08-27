@@ -1,7 +1,7 @@
 # History
-!!! Info
-    `(#{number})` means an issue of this project. You may check details of the issue by visiting https://github.com/zillionare/python-project-wizard/issues/_{number}_
 
+## v1.3.3
+*[#31](https://github.com/zillionare/python-project-wizard/issues/31) Use peotry to create test environment when running tox
 ## v1.3.2
 *[#28](https://github.com/zillionare/python-project-wizard/issues/28) Send notification mail whenever build success or failed
 *[#27](https://github.com/zillionare/python-project-wizard/issues/27) failed to send build notfication mail due to no from field

@@ -4,7 +4,7 @@ name: dev build CI
 
 # Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Triggers the workflow on push or pull request events
   push:
     branches:
       - '*'
@@ -47,7 +47,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions poetry
 
-      # declare env.package_version, env.package_version, env.repo_owner, env.repo_name, env.package_name so you may use it in web hooks.
+      # declare package_version, repo_owner, repo_name, package_name so you may use it in web hooks.
       - name: Declare variables for convenient use
         id: variables_step
         run: |
@@ -88,6 +88,7 @@ jobs:
       - name: Build wheels and source tarball
         run: |
           poetry version $(poetry version --short)-dev.$GITHUB_RUN_NUMBER
+          poetry lock
           poetry build
 
       - name: publish to Test PyPI
@@ -116,16 +117,16 @@ jobs:
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           from: build-bot
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
-          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}} build successfully
+          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}}.${{ github.run_number }} build successfully
           convert_markdown: true
           html_body: |
             ## Build Success
-            ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version }} is built and published to test pypi
+            ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version }}.dev.${{ github.run_number }} is built and published to test pypi
 
             ## Change Details
             ${{ github.event.head_commit.message }}
 
-            For more information, please check change history at https://${{ needs.test.outputs.repo_owner }}.github.io/${{ needs.test.outputs.repo_name }}/${{ needs.test.output.package_version }}/history
+            For more information, please check change history at https://${{ needs.test.outputs.repo_owner }}.github.io/${{ needs.test.outputs.repo_name }}/${{ needs.test.outputs.package_version }}.dev/history
 
             ## Package Download
             The pacakge is available at: https://test.pypi.org/project/${{ needs.test.outputs.package_name }}/
@@ -140,7 +141,7 @@ jobs:
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           from: build-bot
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
-          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}} build failure
+          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}}.dev.${{ github.run_number }} build failure
           convert_markdown: true
           html_body: |
             ## Change Details
