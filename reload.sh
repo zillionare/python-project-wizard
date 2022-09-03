@@ -20,7 +20,7 @@ if [ $# == 1 ]; then
     rm -rf /tmp/$1
 fi
 
-rm -rf /tmp/ppwtest
+rm -rf /tmp/ppw
 
 echo "running ppw"
 ppw

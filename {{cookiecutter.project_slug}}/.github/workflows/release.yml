@@ -65,7 +65,7 @@ jobs:
           poetry run mkdocs build
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com
-          poetry run mike deploy -p -f --ignore `poetry version --short`
+          poetry run mike deploy -p -f --ignore `poetry version --short` latest
           poetry run mike set-default -p `poetry version --short`
 
       - name: Build wheels and source tarball
@@ -114,7 +114,7 @@ jobs:
           convert_markdown: true
           html_body: |
             ## Build Success
-            ${{ needs.release.outputs.package_name }}.${{ needs.release.outputs.package_version }} is built and published to PYPI
+            ${{ needs.release.outputs.package_name }}.${{ needs.release.outputs.package_version }} has been published to PYPI
 
             ## Change Details
             ${{ github.event.head_commit.message }}
@@ -157,9 +157,9 @@ jobs:
       #     msgtype: markdown
       #     title: CI Notification | Success
       #     text: |
-      #       ### Build Success
-      #       ${{ needs.release.outputs.package_version_full }} is built and published to test pypi
+      #       ### ${{ needs.release.outputs.package_name }} Build Success
+      #       ${{ needs.release.outputs.package_version }} has been published to PYPI
       #       ### Change History
-      #       Please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/history
+      #       Please check change history at https://${{ needs.release.outputs.repo_owner }}.github.io/${{ needs.release.outputs.repo_name }}/latest/history
       #       ### Package Download
-      #       Please download the pacakge at: https://test.pypi.org/project/${{ needs.release.outputs.repo_name }}/
+      #       Please download the pacakge at: https://pypi.org/project/${{ needs.release.outputs.repo_name }}/

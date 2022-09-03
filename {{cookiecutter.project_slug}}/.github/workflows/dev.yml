@@ -11,7 +11,6 @@ on:
   pull_request:
     branches:
       - '*'
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -33,6 +32,7 @@ jobs:
       package_name: ${{ steps.variables_step.outputs.package_name }}
       repo_name: ${{ steps.variables_step.outputs.repo_name }}
       repo_owner: ${{ steps.variables_step.outputs.repo_owner }}
+      build_number: ${{ steps.variables_step.outputs.build_number }}
 
     # uncomment the following to pickup services
     # services:
@@ -133,7 +133,7 @@ jobs:
           password: ${{ secrets.BUILD_NOTIFY_MAIL_PASSWORD }}
           from: build-bot
           to: ${{ secrets.BUILD_NOTIFY_MAIL_RCPT }}
-          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}}.${{ github.run_number }} build successfully
+          subject: ${{ needs.test.outputs.package_name }}.${{ needs.test.outputs.package_version}}.dev.${{ github.run_number }} build successfully
           convert_markdown: true
           html_body: |
             ## Build Success
@@ -178,8 +178,8 @@ jobs:
       #     title: CI Notification | Success
       #     text: |
       #       ### Build Success
-      #       ${{ needs.test.outputs.package_version }}.dev.${{ github.run_number }} is built and published to test pypi
+      #       ${{ needs.test.outputs.package_version }}.dev.${{ github.run_number }}published to TEST pypi
       #       ### Change History
       #       Please check change history at https://${{ needs.test.outputs.repo_owner }}.github.io/${{ needs.test.outputs.repo_name }}/${{ needs.test.outputs.package_version }}.dev/history
       #       ### Package Download
-      #       Please download the pacakge at: https://test.pypi.org/project/${{ needs.test.outputs.repo_name }}/
+      #       The pacakge is availabled at: https://test.pypi.org/project/${{ needs.test.outputs.repo_name }}/
