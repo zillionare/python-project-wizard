@@ -25,9 +25,19 @@ repos:
     hooks:
     - id: black
       language_version: python3.8
--   repo: https://gitlab.com/pycqa/flake8
+-   repo: https://github.com/pycqa/flake8
     rev: 3.9.2
     hooks:
     -   id: flake8
         additional_dependencies: [flake8-typing-imports==1.10.0]
         exclude: ^tests
+-   repo: local
+    hooks:
+    -   id: mypy
+        name: mypy
+        entry: mypy
+        exclude: ^tests
+        language: python
+        types: [python]
+        require_serial: true
+        verbose: true
