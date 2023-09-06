@@ -99,10 +99,13 @@ Before you submit a pull request, check that it meets these guidelines:
    https://github.com/zillionare/python-project-wizard/actions
    and make sure that the tests pass for all supported Python versions.
 
-## Tips```
-    $ pytest tests.test_backtest
-```To run a subset of tests.
+## Tips
 
+To run a subset of tests.
+
+```
+    $ pytest tests.test_backtest
+```
 
 ## Deploying
 
@@ -111,9 +114,9 @@ Make sure all your changes are committed (including an entry in HISTORY.md).
 Then run:
 
 ```
-$ poetry patch # possible: major / minor / patch
-$ git push
-$ git push --tags
+    $ poetry patch # possible: major / minor / patch
+    $ git push
+    $ git push --tags
 ```
 
 Travis will then deploy to PyPI if tests pass.
