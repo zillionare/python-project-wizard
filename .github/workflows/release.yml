@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        python-versions: ['3.9']
+        python-versions: ['3.11']
 
     # map step outputs to job outputs so they can be share among jobs
     outputs:
@@ -32,7 +32,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: build change log
         id: build_changelog
@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-versions }}
 
@@ -53,10 +53,10 @@ jobs:
       - name: Declare variables for convenient use
         id: variables_step
         run: |
-          echo "::set-output name=repo_owner::${GITHUB_REPOSITORY%/*}"
-          echo "::set-output name=repo_name::${GITHUB_REPOSITORY#*/}"
-          echo "::set-output name=package_name::`poetry version | awk '{print $1}'`"
-          echo "::set-output name=package_version::`poetry version --short`"
+          echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_OUTPUT
+          echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
+          echo "package_name=`poetry version | awk '{print $1}'`" >> $GITHUB_OUTPUT
+          echo "package_version=`poetry version --short`" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: publish documentation
