@@ -61,7 +61,7 @@ jobs:
 
       - name: publish documentation
         run: |
-          poetry install -E doc
+          poetry install -E dev
           poetry run mkdocs build
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com
