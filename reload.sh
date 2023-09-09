@@ -2,7 +2,7 @@ echo "rebuild ppwtest virtual env"
 rm -rf dist/*
 poetry build
 conda env remove -y -n ppwtest
-conda create -n ppwtest --clone py38
+conda create -n ppwtest --clone py311
 
 eval "$(conda shell.bash hook)"
 conda activate ppwtest

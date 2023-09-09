@@ -4,12 +4,12 @@
 import fire
 
 
-def help():
+def help() -> None:
     print("{{ cookiecutter.project_slug }}")
     print("=" * len("{{ cookiecutter.project_slug }}"))
     print("{{ cookiecutter.project_short_description }}")
 
-def main():
+def main() -> None:
     fire.Fire({
         "help": help
     })

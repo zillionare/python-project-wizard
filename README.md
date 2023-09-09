@@ -31,6 +31,7 @@ This tool will create Python project with the following features:
     - extract change log from github and integrate with release notes automatically
 * Host your documentation from [Git Pages] with zero-config
 * Support multiple versions of documentations (by [mike])
+* Create repo and push initial commits by repo.sh script
 
 ## Quickstart
 

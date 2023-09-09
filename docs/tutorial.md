@@ -151,7 +151,7 @@ This will give you a test report and a lint report. You should see no errors exc
 ## Step 6: Create GitHub Repo
 
 ???+Info
-    Going through step 6 and 7 is tedious. So that's why we provide a bash script --github.sh, to help creating repo, setting secrets and publishing your code to the repo automatically.
+    Going through step 6 and 7 is tedious. So that's why we provide a bash script -- repo.sh, to help creating repo, setting secrets and publishing your code to the repo automatically.
 
     The script looks like the following:
     ```
@@ -290,7 +290,7 @@ The following section will address how to customize github workflow:
         # The type of runner that the job will run on
         strategy:
         matrix:
-            python-versions: ['3.7,' '3.8',' 3.9', '3.10']
+            python-versions: ['3.8',' 3.9', '3.10', '3.11']
             # github action doesn't goes well with windows due to docker support
             # github action doesn't goes well with macos due to `no docker command`
             #os: [ubuntu-20.04, windows-latest, macos-latest]
@@ -308,11 +308,11 @@ The following section will address how to customize github workflow:
         # you may need to change os below
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-python@v2
+        - uses: actions/checkout@v4
+        - uses: actions/setup-python@v4
             with:
             # you may need to change python version below
-            python-version: '3.9'
+            python-version: '3.11'
     ```
 
     ppw also provide example configuration about how to use service and webhooks (Dingtalk notification robot), but it's disabled by default. Uncomment these lines to enable it:

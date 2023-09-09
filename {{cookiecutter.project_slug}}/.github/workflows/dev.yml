@@ -1,5 +1,3 @@
-# This is a basic workflow to help you get started with Actions
-
 name: dev build CI
 
 # Controls when the action will run.
@@ -14,17 +12,17 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# contains 3 jobs: test, publish_dev_build and notification
 jobs:
   test:
     # The type of runner that the job will run on
     strategy:
       matrix:
-        python-versions: ['3.7', '3.8', '3.9', '3.10']
+        python-versions: ['3.8', '3.9', '3.10', '3.11']
         # github action doesn't goes well with windows due to docker support
         # github action doesn't goes well with macos due to `no docker command`
-        #os: [ubuntu-20.04, windows-latest, macos-latest]
-        os: [ubuntu-20.04]
+        #os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     # map step outputs to job outputs so they can be share among jobs
     outputs:
@@ -49,8 +47,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-versions }}
 
@@ -63,10 +61,10 @@ jobs:
       - name: Declare variables for convenient use
         id: variables_step
         run: |
-          echo "::set-output name=repo_owner::${GITHUB_REPOSITORY%/*}"
-          echo "::set-output name=repo_name::${GITHUB_REPOSITORY#*/}"
-          echo "::set-output name=package_name::`poetry version | awk '{print $1}'`"
-          echo "::set-output name=package_version::`poetry version --short`"
+          echo "repo_owner=${GITHUB_REPOSITORY%/*}" >> $GITHUB_OUTPUT
+          echo "repo_name=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
+          echo "package_name=`poetry version | awk '{print $1}'`" >> $GITHUB_OUTPUT
+          echo "package_version=`poetry version --short`" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: test with tox
@@ -82,10 +80,10 @@ jobs:
     # you may need to change os below
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
