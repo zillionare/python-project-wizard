@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        python-versions: ['3.11']
+        python-versions: ['3.9']
 
     # map step outputs to job outputs so they can be share among jobs
     outputs:
@@ -61,7 +61,7 @@ jobs:
 
       - name: publish documentation
         run: |
-          poetry install -E dev
+          poetry install -E doc
           poetry run mkdocs build
           git config --global user.name Docs deploy
           git config --global user.email docs@dummy.bot.com

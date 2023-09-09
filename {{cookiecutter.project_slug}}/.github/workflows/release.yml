@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        python-versions: ['3.11']
+        python-versions: ['3.9']
 
     # map step outputs to job outputs so they can be share among jobs
     outputs:
